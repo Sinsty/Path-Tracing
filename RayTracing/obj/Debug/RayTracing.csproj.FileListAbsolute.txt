@@ -1,0 +1,10 @@
+D:\YLink\RayTracing\RayTracing\bin\Debug\RayTracing.exe.config
+D:\YLink\RayTracing\RayTracing\bin\Debug\RayTracing.exe
+D:\YLink\RayTracing\RayTracing\bin\Debug\RayTracing.pdb
+D:\YLink\RayTracing\RayTracing\obj\Debug\RayTracing.csproj.AssemblyReference.cache
+D:\YLink\RayTracing\RayTracing\obj\Debug\RayTracing.Form1.resources
+D:\YLink\RayTracing\RayTracing\obj\Debug\RayTracing.Properties.Resources.resources
+D:\YLink\RayTracing\RayTracing\obj\Debug\RayTracing.csproj.GenerateResource.cache
+D:\YLink\RayTracing\RayTracing\obj\Debug\RayTracing.csproj.CoreCompileInputs.cache
+D:\YLink\RayTracing\RayTracing\obj\Debug\RayTracing.exe
+D:\YLink\RayTracing\RayTracing\obj\Debug\RayTracing.pdb

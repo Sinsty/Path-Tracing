@@ -1,0 +1,16 @@
+D:\YLink\RayTracing\RayTracing\bin\Debug\net8.0-windows\RayTracing.exe
+D:\YLink\RayTracing\RayTracing\bin\Debug\net8.0-windows\RayTracing.dll.config
+D:\YLink\RayTracing\RayTracing\bin\Debug\net8.0-windows\RayTracing.deps.json
+D:\YLink\RayTracing\RayTracing\bin\Debug\net8.0-windows\RayTracing.runtimeconfig.json
+D:\YLink\RayTracing\RayTracing\bin\Debug\net8.0-windows\RayTracing.dll
+D:\YLink\RayTracing\RayTracing\bin\Debug\net8.0-windows\RayTracing.pdb
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.Form1.resources
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.Properties.Resources.resources
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.csproj.GenerateResource.cache
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.GeneratedMSBuildEditorConfig.editorconfig
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.csproj.CoreCompileInputs.cache
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.dll
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\refint\RayTracing.dll
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.pdb
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.genruntimeconfig.cache
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\ref\RayTracing.dll
