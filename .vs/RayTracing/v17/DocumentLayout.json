@@ -3,48 +3,48 @@
   "WorkspaceRootPath": "D:\\YLink\\RayTracing\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\light.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\light.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\camerarenderobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\camerarenderobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\raycasthit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\raycasthit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\sceneobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\sceneobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\sphere.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\vector3f.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\vector3f.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\vectorcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\vectorcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|D:\\YLink\\RayTracing\\raytracing\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\raycasthit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\raycasthit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\camerarenderobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\camerarenderobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\light.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\light.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|d:\\ylink\\raytracing\\raytracing\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1C0DA0B-1448-46A6-A23A-A4C8FADBF5A2}|RayTracing\\RayTracing.csproj|solutionrelative:raytracing\\ray.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,153 +54,145 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Sphere.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Sphere.cs",
-              "RelativeDocumentMoniker": "RayTracing\\Sphere.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Sphere.cs",
-              "RelativeToolTip": "RayTracing\\Sphere.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T12:01:00.567Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SceneObject.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\SceneObject.cs",
-              "RelativeDocumentMoniker": "RayTracing\\SceneObject.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\SceneObject.cs",
-              "RelativeToolTip": "RayTracing\\SceneObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T14:13:56.389Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RaycastHit.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\RaycastHit.cs",
-              "RelativeDocumentMoniker": "RayTracing\\RaycastHit.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\RaycastHit.cs",
-              "RelativeToolTip": "RayTracing\\RaycastHit.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T14:18:14.473Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CameraRenderObject.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\CameraRenderObject.cs",
-              "RelativeDocumentMoniker": "RayTracing\\CameraRenderObject.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\CameraRenderObject.cs",
-              "RelativeToolTip": "RayTracing\\CameraRenderObject.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T14:15:23.936Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Light.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Light.cs",
-              "RelativeDocumentMoniker": "RayTracing\\Light.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Light.cs",
-              "RelativeToolTip": "RayTracing\\Light.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T13:29:42.886Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Material.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Material.cs",
-              "RelativeDocumentMoniker": "RayTracing\\Material.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Material.cs",
-              "RelativeToolTip": "RayTracing\\Material.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T13:09:31.333Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Camera.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Camera.cs",
-              "RelativeDocumentMoniker": "RayTracing\\Camera.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Camera.cs",
-              "RelativeToolTip": "RayTracing\\Camera.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T12:53:53.812Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Form1.cs",
-              "RelativeDocumentMoniker": "RayTracing\\Form1.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Form1.cs",
-              "RelativeToolTip": "RayTracing\\Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T11:39:28.669Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Ray.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Ray.cs",
-              "RelativeDocumentMoniker": "RayTracing\\Ray.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Ray.cs",
-              "RelativeToolTip": "RayTracing\\Ray.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T12:09:38.142Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Vector3f.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Vector3f.cs",
-              "RelativeDocumentMoniker": "RayTracing\\Vector3f.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Vector3f.cs",
-              "RelativeToolTip": "RayTracing\\Vector3f.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAIwIwAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Sphere.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Sphere.cs",
+              "RelativeDocumentMoniker": "RayTracing\\Sphere.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Sphere.cs",
+              "RelativeToolTip": "RayTracing\\Sphere.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACEAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T08:50:33.266Z",
+              "WhenOpened": "2024-10-13T12:01:00.567Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 2,
+              "Title": "Camera.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Camera.cs",
+              "RelativeDocumentMoniker": "RayTracing\\Camera.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Camera.cs",
+              "RelativeToolTip": "RayTracing\\Camera.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-14T17:18:47.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Form1.cs",
+              "RelativeDocumentMoniker": "RayTracing\\Form1.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Form1.cs",
+              "RelativeToolTip": "RayTracing\\Form1.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAkwBkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T11:39:28.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "VectorColor.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\VectorColor.cs",
+              "RelativeDocumentMoniker": "RayTracing\\VectorColor.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\VectorColor.cs",
+              "RelativeToolTip": "RayTracing\\VectorColor.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAD4vycAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-14T17:00:31.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RaycastHit.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\RaycastHit.cs",
+              "RelativeDocumentMoniker": "RayTracing\\RaycastHit.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\RaycastHit.cs",
+              "RelativeToolTip": "RayTracing\\RaycastHit.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:18:14.473Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CameraRenderObject.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\CameraRenderObject.cs",
+              "RelativeDocumentMoniker": "RayTracing\\CameraRenderObject.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\CameraRenderObject.cs",
+              "RelativeToolTip": "RayTracing\\CameraRenderObject.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T14:15:23.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Light.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Light.cs",
+              "RelativeDocumentMoniker": "RayTracing\\Light.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Light.cs",
+              "RelativeToolTip": "RayTracing\\Light.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T13:29:42.886Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Material.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Material.cs",
+              "RelativeDocumentMoniker": "RayTracing\\Material.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Material.cs",
+              "RelativeToolTip": "RayTracing\\Material.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T13:09:31.333Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Form1.cs",
               "RelativeDocumentMoniker": "RayTracing\\Form1.cs",
               "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Form1.cs [Design]",
               "RelativeToolTip": "RayTracing\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-13T11:09:48.631Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-10-13T11:09:48.631Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Ray.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Ray.cs",
+              "RelativeDocumentMoniker": "RayTracing\\Ray.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Ray.cs",
+              "RelativeToolTip": "RayTracing\\Ray.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T12:09:38.142Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Vector3f.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\Vector3f.cs",
+              "RelativeDocumentMoniker": "RayTracing\\Vector3f.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Vector3f.cs",
+              "RelativeToolTip": "RayTracing\\Vector3f.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAIwHEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-13T08:50:33.266Z"
             }
           ]
         }

@@ -2,11 +2,15 @@
 {
     internal class Material
     {
-        public Vector3f Color {  get; private set; }
+        public VectorColor Color {  get; private set; }
+        public float Specularity;
+        public float LightIntencity;
 
-        public Material(Vector3f color)
+        public Material(VectorColor color, float specularity, float lightIntencity)
         {
             Color = color;
+            Specularity = specularity;
+            LightIntencity = lightIntencity;
         }
     }
 }

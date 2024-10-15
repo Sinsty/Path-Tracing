@@ -6,7 +6,7 @@ namespace RayTracing
     {
         public override Vector3f Position { get; set; }
         public float Radius { get; private set; }
-        public override Material AppliedMaterial { get; set; }
+        public override Material AppliedMaterial { get; protected set; }
 
         public Sphere(Vector3f position, float radius, Material material)
         {

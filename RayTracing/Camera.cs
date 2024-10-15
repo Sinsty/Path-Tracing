@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace RayTracing
@@ -28,53 +29,99 @@ namespace RayTracing
 
             Ray ray = new Ray(Position, new Vector3f(directionX, directionY, 1));
 
-            return CastRay(ray);
+            return TraceRay(ray, 1, 10);
         }
 
-        private Color CastRay(Ray ray)
+        private Color TraceRay(Ray ray, int raysCount, int maxBounces)
         {
-            float closestIntersectionDistance = float.MaxValue;
-            CameraRenderObject closestSphere = null;
-            Vector3f closestSphereNormal = Vector3f.Zero;
+            return CastRay(ray, maxBounces, new VectorColor(1, 1, 1), new VectorColor(0, 0, 0));
+        }
+
+        private Color CastRay(Ray ray, int maxBounces, VectorColor rayColor, VectorColor incomingLight)
+        {
+            Sphere closestObject = null;
+            RaycastHit closestObjectHitInfo = new RaycastHit(float.MaxValue, Vector3f.Zero, Vector3f.Zero);
 
             foreach (var sceneObject in _renderObjects)
             {
                 if (sceneObject.RayIntersect(ray, out RaycastHit hit))
                 {
-                    if (hit.Distance < closestIntersectionDistance)
+                    if (hit.Distance < closestObjectHitInfo.Distance)
                     {
-                        closestSphere = sceneObject;
-                        closestIntersectionDistance = hit.Distance;
-                        closestSphereNormal = hit.Normal;
+                        closestObject = (Sphere)sceneObject;
+                        closestObjectHitInfo = hit;
                     }
                 }
             }
+            
 
-            if (closestSphere != null)
+            if (closestObject != null)
             {
-                return CalculateLightForColorInPosition(closestSphere.AppliedMaterial.Color, 
-                                                        closestSphere.Position, 
-                                                        closestSphereNormal);
+                rayColor *= closestObject.AppliedMaterial.Color;
+                incomingLight += rayColor * closestObject.AppliedMaterial.LightIntencity;
+
+                if (maxBounces == 0)
+                {
+                    return incomingLight.ToBaseColor();
+                }
+
+                Vector3f reflectedRayDirection = ray.direction - 2 * Vector3f.Dot(ray.direction, closestObjectHitInfo.Normal) * closestObjectHitInfo.Normal;
+                Ray reflectedRay = new Ray(closestObjectHitInfo.Point, reflectedRayDirection);
+
+                return CastRay(reflectedRay, maxBounces - 1, rayColor, incomingLight);
             }
             else
             {
-                return Color.Black;
+                return incomingLight.ToBaseColor();
             }
         }
 
-        private Color CalculateLightForColorInPosition(Vector3f rawColor, Vector3f position, Vector3f surfaceNormal)
-        {
-            float diffuseLightIntensity = 0;
-            foreach (Light light in _sceneLight)
-            {
-                Vector3f lightDirection = (light.Position - position).GetNormalized();
-                diffuseLightIntensity += light.Intensity + MathF.Max(0, Vector3f.Dot(lightDirection, surfaceNormal));
-            }
+        //private Color CastRay(Ray ray)
+        //{
+        //    float closestIntersectionDistance = float.MaxValue;
+        //    CameraRenderObject closestSphere = null;
+        //    Vector3f closestSphereNormal = Vector3f.Zero;
 
-            Vector3f diffuseLightColor = rawColor * diffuseLightIntensity;
-            diffuseLightColor.ClampValues(0, 255);
+        //    foreach (var sceneObject in _renderObjects)
+        //    {
+        //        if (sceneObject.RayIntersect(ray, out RaycastHit hit))
+        //        {
+        //            if (hit.Distance < closestIntersectionDistance)
+        //            {
+        //                closestSphere = sceneObject;
+        //                closestIntersectionDistance = hit.Distance;
+        //                closestSphereNormal = hit.Normal;
+        //            }
+        //        }
+        //    }
 
-            return Color.FromArgb((int)diffuseLightColor.x, (int)diffuseLightColor.y, (int)diffuseLightColor.z);
-        }
+        //    if (closestSphere != null)
+        //    {
+        //        return CalculateLightForColorInPosition(closestSphere.AppliedMaterial,
+        //                                                closestSphere.Position,
+        //                                                closestSphereNormal);
+        //    }
+        //    else
+        //    {
+        //        return Color.AliceBlue;
+        //    }
+        //}
+
+        //private Color CalculateLightForColorInPosition(Material material, Vector3f position, Vector3f surfaceNormal)
+        //{
+        //    float diffuseLightIntensity = 0;
+        //    foreach (Light light in _sceneLight)
+        //    {
+        //        Vector3f lightDirection = (light.Position - position).GetNormalized();
+        //        Vector3f viewDirection = (Position - position).GetNormalized();
+        //        diffuseLightIntensity += light.Intensity * MathF.Max(0, Vector3f.Dot(lightDirection, surfaceNormal));
+        //    }
+
+        //    Vector3f diffuseLightColor = material.Color * diffuseLightIntensity;
+        //    diffuseLightColor.ClampValuesFromVector(Vector3f.Zero, material.Color);
+
+
+        //    return Color.FromArgb((int)diffuseLightColor.x, (int)diffuseLightColor.y, (int)diffuseLightColor.z);
+        //}
     }
 }

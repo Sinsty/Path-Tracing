@@ -50,9 +50,19 @@ namespace RayTracing
             return new Vector3f(a.x * b, a.y * b, a.z * b);
         }
 
+        public static Vector3f operator + (Vector3f a, float b)
+        {
+            return new Vector3f(a.x + b, a.y + b, a.z + b);
+        }
+
         public static Vector3f operator * (float a, Vector3f b)
         {
             return new Vector3f(b.x * a, b.y * a, b.z * a);
+        }
+
+        public static Vector3f operator / (Vector3f a, float b)
+        {
+            return new Vector3f(a.x / b, a.y / b, a.z / b);
         }
 
         public static Vector3f operator + (Vector3f a, Vector3f b)
@@ -141,6 +151,13 @@ namespace RayTracing
             x = MathF.Max(MathF.Min(x, max), min);
             y = MathF.Max(MathF.Min(y, max), min);
             z = MathF.Max(MathF.Min(z, max), min);
+        }
+
+        public void ClampValuesFromVector(Vector3f minVector, Vector3f maxVector)
+        {
+            x = MathF.Max(MathF.Min(x, maxVector.x), minVector.x);
+            y = MathF.Max(MathF.Min(y, maxVector.y), minVector.y);
+            z = MathF.Max(MathF.Min(z, maxVector.z), minVector.z);
         }
     }
 }

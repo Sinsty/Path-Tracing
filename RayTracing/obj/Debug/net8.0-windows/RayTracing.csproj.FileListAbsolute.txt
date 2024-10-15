@@ -14,3 +14,4 @@ D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\refint\RayTracing.dll
 D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.pdb
 D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.genruntimeconfig.cache
 D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\ref\RayTracing.dll
+D:\YLink\RayTracing\RayTracing\obj\Debug\net8.0-windows\RayTracing.sourcelink.json
