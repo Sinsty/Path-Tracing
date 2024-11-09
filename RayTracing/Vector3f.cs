@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace RayTracing
 {
@@ -45,6 +46,11 @@ namespace RayTracing
             return a.x * b.x + a.y * b.y + a.z * b.z;
         }
 
+        public static Vector3f Reflect(Vector3f vector, Vector3f normal)
+        {
+            return vector - 2 * Dot(vector, normal) * normal;
+        }
+
         public static Vector3f operator * (Vector3f a, float b)
         {
             return new Vector3f(a.x * b, a.y * b, a.z * b);
@@ -85,6 +91,11 @@ namespace RayTracing
             return Multiply(a, b);
         }
 
+        public static Vector3f operator / (Vector3f a, Vector3f b)
+        {
+            return Multiply(a, new Vector3f(1 / b.x, 1 / b.y, 1 / b.z));
+        }
+
         public static float DegreesToRadians(float degrees)
         {
             return degrees * MathF.PI / 180f;
@@ -93,7 +104,7 @@ namespace RayTracing
         //Vector length (magnitude)
         public float GetLength()
         {
-            return MathF.Sqrt(MathF.Pow(x, 2) + MathF.Pow(y, 2) + MathF.Pow(z, 2));
+            return MathF.Sqrt(x*x + y*y + z*z);
         }
 
         public Vector3f GetNormalized()

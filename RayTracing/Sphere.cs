@@ -10,12 +10,12 @@ namespace RayTracing
 
         public Sphere(Vector3f position, float radius, Material material)
         {
-            this.Position = position;
-            this.Radius = radius;
+            Position = position;
+            Radius = radius;
             AppliedMaterial = material;
         }
 
-        public override bool RayIntersect(Ray ray, out RaycastHit hit)
+        public override bool RayIntersect(Ray ray, out HitInfo hit)
         {
             Vector3f oc = ray.origin - Position;
             float a = Vector3f.Dot(ray.direction, ray.direction);
@@ -25,16 +25,17 @@ namespace RayTracing
 
             if (discriminant < 0)
             {
-                hit = new RaycastHit(0, Vector3f.Zero, Vector3f.Zero);
+                hit = new HitInfo(0, Vector3f.Zero, Vector3f.Zero);
                 return false;
             }
             else
             {
                 float distance = (-b - MathF.Sqrt(discriminant)) / (2 * a);
-                Vector3f hitPosition = ray.origin + ray.direction * distance;
-                Vector3f normal = (hitPosition - Position).GetNormalized();
 
-                hit = new RaycastHit(distance, hitPosition, normal);
+                Vector3f hitPosition = ray.origin + ray.direction * distance;
+                Vector3f normal = hitPosition - Position;
+
+                hit = new HitInfo(distance, hitPosition, normal);
 
                 return true;
             }

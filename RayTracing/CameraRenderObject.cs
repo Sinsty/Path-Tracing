@@ -4,6 +4,6 @@
     {
         public abstract Material AppliedMaterial { get; protected set; }
 
-        public abstract bool RayIntersect(Ray ray, out RaycastHit hit);
+        public abstract bool RayIntersect(Ray ray, out HitInfo hit);
     }
 }
