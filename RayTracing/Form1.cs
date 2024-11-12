@@ -58,10 +58,11 @@ namespace RayTracing
 
         private void InitializeCamera()
         {
-            Material sphereMaterial1 = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, new VectorColor(0.05f, 0.05f, 0.05f), 1f);
-            Material sphereMaterial2 = new Material(new VectorColor(0.2f, 0.7f, 0.4f), 0.25f, 0.25f, new VectorColor(0.05f, 0.05f, 0.05f), 0f); // rought-metallic
-            Material sphereMaterial3 = new Material(new VectorColor(0.35f, 0.55f, 0.75f), 0.25f, 1f, new VectorColor(0.5f, 0.5f, 0.5f), 0f); // metallic
-            Material sphereMaterial4 = new Material(new VectorColor(0.5f, 0.5f, 0.5f), 1f, 0f, new VectorColor(0.05f, 0.05f, 0.05f), 0f); // rought
+            Material sphereMaterial1 = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, new VectorColor(0.05f, 0.05f, 0.05f), 5f);
+            Material sphereMaterial2 = new Material(new VectorColor(0.2f, 0.7f, 0.4f), 0.25f, 0.25f, new VectorColor(0.1f, 0.1f, 0.1f), 0f); // rought-metallic
+            Material sphereMaterial3 = new Material(new VectorColor(0.35f, 0.55f, 0.75f), 0.25f, 1f, new VectorColor(0.95f, 0.95f, 0.95f), 0f); // metallic
+            Material sphereMaterial4 = new Material(new VectorColor(0.5f, 0.5f, 0.5f), 1f, 0f, new VectorColor(0.05f, 0.05f, 0.05f), 0f); // rough
+            Material sphereMaterial6 = new Material(new VectorColor(1f, 1f, 1f), 0.5f, 0f, new VectorColor(0.5f, 0.5f, 0.5f), 0f);
 
             Material sphereMaterial5 = new Material(new VectorColor(1, 1f, 1f), 1f, 0f, new VectorColor(0.05f, 0.05f, 0.05f), 1);
 
@@ -71,8 +72,9 @@ namespace RayTracing
                 new Sphere(new Vector3f(2, 0, 7), 1, sphereMaterial2),
                 new Sphere(new Vector3f(-2, 0, 7), 1, sphereMaterial3),
                 new Sphere(new Vector3f(0, -31, 7), 30, sphereMaterial4),
+                new Sphere(new Vector3f(4, 0, 7), 1, sphereMaterial6),
 
-                //new Sphere(new Vector3f(3, 5, -2), 1, sphereMaterial5),
+                new Sphere(new Vector3f(5, 5, 7), 1, sphereMaterial5),
             ];
 
             _camera = new Camera(Vector3f.Zero, 60, 1000, spheres);

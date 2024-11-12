@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace RayTracing
@@ -36,23 +37,29 @@ namespace RayTracing
 
         private Color TraceRay(Ray ray, int raysCount, int maxBounces)
         {
-            VectorColor currentColor = _raycaster.CastRay(ray, maxBounces, new VectorColor(1, 1, 1), new VectorColor(0, 0, 0));
+            Vector3f currentColor = _raycaster.CastRay(ray, maxBounces, new VectorColor(1, 1, 1), new Vector3f(0, 0, 0));
 
             int i = 1;
             while (i < raysCount)
             {
-                VectorColor rayColor = _raycaster.CastRay(ray, maxBounces, new VectorColor(1, 1, 1), new VectorColor(0, 0, 0));
+                Vector3f rayColor = _raycaster.CastRay(ray, maxBounces, new VectorColor(1, 1, 1), new Vector3f(0, 0, 0));
 
-                float R = (rayColor.Rgb.x + currentColor.Rgb.x * i) / (i + 1);
-                float G = (rayColor.Rgb.y + currentColor.Rgb.y * i) / (i + 1);
-                float B = (rayColor.Rgb.z + currentColor.Rgb.z * i) / (i + 1);
+                float R = (rayColor.x + currentColor.x * i) / (i + 1);
+                float G = (rayColor.y + currentColor.y * i) / (i + 1);
+                float B = (rayColor.z + currentColor.z * i) / (i + 1);
 
-                currentColor = new VectorColor(R, G, B);
+                currentColor = new Vector3f(R, G, B);
 
                 i++;
             }
 
-            return currentColor.ToBaseColor();
+            if (currentColor.x < 0 || currentColor.y < 0 || currentColor.z < 0)
+            {
+                //Debug.WriteLine(currentColor.x + " " + currentColor.y + " " + currentColor.z);
+                //Debug.WriteLine(VectorColor.AcesFilmTonemapping(currentColor).ToBaseColor());
+            }
+
+            return VectorColor.GammaCorrection(VectorColor.AcesFilmTonemapping(currentColor)).ToBaseColor();
         }
 
         

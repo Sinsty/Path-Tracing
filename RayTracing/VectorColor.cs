@@ -5,12 +5,6 @@ namespace RayTracing
 {
     internal struct VectorColor
     {
-        private const float _acesA = 2.51f;
-        private const float _acesB = 0.03f;
-        private const float _acesC = 2.43f;
-        private const float _acesD = 0.59f;
-        private const float _acesE = 0.14f;
-
         private Vector3f _color;
 
 		public Vector3f Rgb
@@ -49,23 +43,40 @@ namespace RayTracing
             Rgb = new Vector3f(red, green, blue);
         }
 
-        public static VectorColor AcesFilmTonemapping(Vector3f x)
+        public static VectorColor AcesFilmTonemapping(Vector3f color)
         {
-            Vector3f tonemappedColor = (x * (_acesA * x + _acesB)) / (x * (_acesC * x + _acesA) + _acesE);
-            tonemappedColor.ClampValues(0, 1);
+            return new VectorColor(
+                ParameterAcesFilmTonemapping(color.x), 
+                ParameterAcesFilmTonemapping(color.y), 
+                ParameterAcesFilmTonemapping(color.z)
+                );
+        }
 
-            return new VectorColor(tonemappedColor);
+        public static VectorColor GammaCorrection(VectorColor color)
+        {
+            return new VectorColor(GammaCorrection(color.Rgb));
+        }
+
+        public static Vector3f GammaCorrection(Vector3f color)
+        {
+            return new Vector3f(MathF.Pow(color.x, 1 / 2.2f), MathF.Pow(color.y, 1 / 2.2f), MathF.Pow(color.z, 1 / 2.2f));
+        }
+
+        private static float ParameterAcesFilmTonemapping(float x)
+        {
+            float tonemappedColor = (x * (2.51f * x + 0.03f)) / (x * (2.43f * x + 0.59f) + 0.14f);
+            //float tonemappedColor = x / (x + 1);
+            return MathF.Max(MathF.Min(tonemappedColor, 1), 0);
         }
 
         public Color ToBaseColor()
 		{
-			return Color.FromArgb((int)(MathF.Pow(Rgb.x, 1/2.2f) * 255), (int)(MathF.Pow(Rgb.y, 1 / 2.2f) * 255), (int)(MathF.Pow(Rgb.z, 1 / 2.2f) * 255));
+			return Color.FromArgb((int)MathF.Round(Rgb.x * 255), (int)MathF.Round(Rgb.y * 255), (int)MathF.Round(Rgb.z * 255));
         }
 
 		private Vector3f SetColor(Vector3f color)
 		{
-			color.ClampValues(0, 1);
-            return color;
+            return Vector3f.ClampValues(color, 0, 1);
 		}
 	}
 }

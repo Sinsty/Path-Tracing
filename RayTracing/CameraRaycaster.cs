@@ -13,7 +13,7 @@ namespace RayTracing
             _renderObjects = renderObjects;
         }
 
-        public VectorColor CastRay(Ray ray, int maxBounces, VectorColor rayColor, VectorColor incomingLight)
+        public Vector3f CastRay(Ray ray, int maxBounces, VectorColor rayColor, Vector3f incomingLight)
         {
             HitInfo hit;
             CameraRenderObject intersectObject = GetObjectFromRay(ray, out hit);
@@ -29,9 +29,11 @@ namespace RayTracing
                 incomingLight = CastRay(reflectedRay, maxBounces - 1, rayColor, incomingLight);
 
                 Material material = intersectObject.AppliedMaterial;
-                VectorColor brdf = BRDF.Brdf(-hit.Normal, ray.direction, reflectedRay.direction, material.Color, material.F0, material.Roughtness, material.Metalness);
-                Debug.WriteLine(brdf.Rgb.x + " " + brdf.Rgb.y + " " + brdf.Rgb.z);
-                return (material.Color * material.LightIntencity) + (brdf * 100 * incomingLight * Vector3f.Dot(reflectedRay.direction, -hit.Normal));
+                VectorColor brdf = BRDF.Brdf(-hit.Normal, ray.direction, reflectedRay.direction, material.Color, material.F0, material.Roughness, material.Metalness);
+
+                Vector3f color = (material.Color.Rgb * material.LightIntencity) + (brdf.Rgb * incomingLight * MathF.Max(Vector3f.Dot(reflectedRay.direction, -hit.Normal), 0));
+
+                return new Vector3f(color.x, color.y, color.z);
             }
             else
             {
