@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 
 namespace RayTracing
@@ -37,12 +36,12 @@ namespace RayTracing
 
         private Color TraceRay(Ray ray, int raysCount, int maxBounces)
         {
-            Vector3f currentColor = _raycaster.CastRay(ray, maxBounces, 3);
+            Vector3f currentColor = _raycaster.CastRay(ray, maxBounces);
 
             int i = 1;
             while (i < raysCount)
             {
-                Vector3f rayColor = _raycaster.CastRay(ray, maxBounces, 3);
+                Vector3f rayColor = _raycaster.CastRay(ray, maxBounces);
 
                 float R = (rayColor.x + currentColor.x * i) / (i + 1);
                 float G = (rayColor.y + currentColor.y * i) / (i + 1);
@@ -59,9 +58,7 @@ namespace RayTracing
                 //Debug.WriteLine(VectorColor.AcesFilmTonemapping(currentColor).ToBaseColor());
             }
 
-            return VectorColor.GammaCorrection(VectorColor.AcesFilmTonemapping(currentColor)).ToBaseColor();
+            return VectorColor.GammaCorrection(VectorColor.AcesFilmicTonemapping(currentColor)).ToBaseColor();
         }
-
-        
     }
 }

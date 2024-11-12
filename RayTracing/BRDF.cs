@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
+using static System.Windows.Forms.DataFormats;
 
 namespace RayTracing
 {
     internal static class BRDF
     {
-        public static VectorColor Brdf(Vector3f normal, Vector3f viewVector, Vector3f lightVector, VectorColor objectColor, VectorColor F0, float objectRoughness, float objectMetalness)
+        public static VectorColor Brdf(Vector3f normal, Vector3f viewVector, Vector3f lightVector, VectorColor objectColor, VectorColor F0, float objectRoughtness, float objectMetalness)
         {
             F0 = new VectorColor(Vector3f.One * 0.05f) + objectColor * F0 * objectMetalness;
             //F0 = new VectorColor(0.04f, 0.04f, 0.04f);
@@ -14,7 +15,7 @@ namespace RayTracing
             Vector3f diffuseK = (Vector3f.One - fresnel) * (1 - objectMetalness);
 
             VectorColor lambert = LambertDiffuseFunction(objectColor);
-            Vector3f cookTorrance = CookTorranceSpecularFunction(normal, viewVector, lightVector, fresnel, objectRoughness);
+            Vector3f cookTorrance = CookTorranceSpecularFunction(normal, viewVector, lightVector, fresnel, objectRoughtness);
 
             VectorColor brdf = new VectorColor(lambert.Rgb * diffuseK + cookTorrance);
 
@@ -33,7 +34,6 @@ namespace RayTracing
             //Debug.WriteLine("K diffuse * lambert: " + (lambert.Rgb * diffuseK).x + " " + (lambert.Rgb * diffuseK).y + " " + (lambert.Rgb * diffuseK).z);
             //Debug.WriteLine("=============================================");
 
-
             return brdf;
         }
 
@@ -41,6 +41,7 @@ namespace RayTracing
         {
             return objectColor / MathF.PI;
         }
+
 
         private static Vector3f CookTorranceSpecularFunction(Vector3f normal, Vector3f viewVector, Vector3f lightVector, Vector3f fresnel, float roughness)
         {
@@ -57,7 +58,7 @@ namespace RayTracing
             return numerator / MathF.Max(denominator, 0.00001f);
         }
 
-        //GGX/Trowbridge-reitz model (GGX NDF)
+        // GGX/Trowbridge-reitz model
         private static float NormalDistribution(Vector3f normal, Vector3f viewVector, Vector3f lightVector, float roughness)
         {
             float alpha = roughness * roughness;

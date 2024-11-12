@@ -43,35 +43,30 @@ namespace RayTracing
             Rgb = new Vector3f(red, green, blue);
         }
 
-        public static VectorColor AcesFilmTonemapping(Vector3f color)
+        public static VectorColor AcesFilmicTonemapping(Vector3f color)
         {
             return new VectorColor(
-                ParameterAcesFilmTonemapping(color.x), 
-                ParameterAcesFilmTonemapping(color.y), 
-                ParameterAcesFilmTonemapping(color.z)
+                ParameterAcesFilmicTonemapping(color.x),
+                ParameterAcesFilmicTonemapping(color.y),
+                ParameterAcesFilmicTonemapping(color.z)
                 );
+        }
+
+        private static float ParameterAcesFilmicTonemapping(float x)
+        {
+            float tonemappedColor = (x * (2.51f * x + 0.03f)) / (x * (2.43f * x + 0.59f) + 0.14f);
+            return MathF.Max(MathF.Min(tonemappedColor, 1), 0);
         }
 
         public static VectorColor GammaCorrection(VectorColor color)
         {
-            return new VectorColor(GammaCorrection(color.Rgb));
+            return new VectorColor(MathF.Pow(color.Rgb.x, 1 / 2.2f), MathF.Pow(color.Rgb.y, 1 / 2.2f), MathF.Pow(color.Rgb.z, 1 / 2.2f));
         }
 
-        public static Vector3f GammaCorrection(Vector3f color)
-        {
-            return new Vector3f(MathF.Pow(color.x, 1 / 2.2f), MathF.Pow(color.y, 1 / 2.2f), MathF.Pow(color.z, 1 / 2.2f));
-        }
-
-        private static float ParameterAcesFilmTonemapping(float x)
-        {
-            float tonemappedColor = (x * (2.51f * x + 0.03f)) / (x * (2.43f * x + 0.59f) + 0.14f);
-            //float tonemappedColor = x / (x + 1);
-            return MathF.Max(MathF.Min(tonemappedColor, 1), 0);
-        }
 
         public Color ToBaseColor()
 		{
-			return Color.FromArgb((int)MathF.Round(Rgb.x * 255), (int)MathF.Round(Rgb.y * 255), (int)MathF.Round(Rgb.z * 255));
+            return Color.FromArgb((int)MathF.Round(Rgb.x * 255), (int)MathF.Round(Rgb.y * 255), (int)MathF.Round(Rgb.z * 255));
         }
 
 		private Vector3f SetColor(Vector3f color)

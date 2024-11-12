@@ -68,13 +68,12 @@ namespace RayTracing
 
             Sphere[] spheres =
             [
-                new Sphere(new Vector3f(0, 5, 3), 2, sphereMaterial1),
                 new Sphere(new Vector3f(2, 0, 7), 1, sphereMaterial2),
                 new Sphere(new Vector3f(-2, 0, 7), 1, sphereMaterial3),
                 new Sphere(new Vector3f(0, -31, 7), 30, sphereMaterial4),
                 new Sphere(new Vector3f(4, 0, 7), 1, sphereMaterial6),
 
-                new Sphere(new Vector3f(5, 5, 7), 1, sphereMaterial5),
+                //new Sphere(new Vector3f(3, 5, -2), 1, sphereMaterial5),
             ];
 
             _camera = new Camera(Vector3f.Zero, 60, 1000, spheres);
