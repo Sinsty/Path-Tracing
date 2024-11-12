@@ -32,17 +32,17 @@ namespace RayTracing
 
             Ray ray = new Ray(Position, new Vector3f(directionX, directionY, 1));
 
-            return TraceRay(ray, 5, 5);
+            return TraceRay(ray, 2, 5);
         }
 
         private Color TraceRay(Ray ray, int raysCount, int maxBounces)
         {
-            Vector3f currentColor = _raycaster.CastRay(ray, maxBounces, new VectorColor(1, 1, 1), new Vector3f(0, 0, 0));
+            Vector3f currentColor = _raycaster.CastRay(ray, maxBounces, 3);
 
             int i = 1;
             while (i < raysCount)
             {
-                Vector3f rayColor = _raycaster.CastRay(ray, maxBounces, new VectorColor(1, 1, 1), new Vector3f(0, 0, 0));
+                Vector3f rayColor = _raycaster.CastRay(ray, maxBounces, 3);
 
                 float R = (rayColor.x + currentColor.x * i) / (i + 1);
                 float G = (rayColor.y + currentColor.y * i) / (i + 1);

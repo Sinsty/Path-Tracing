@@ -62,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -89,22 +89,9 @@
               "RelativeDocumentMoniker": "RayTracing\\Camera.cs",
               "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\Camera.cs",
               "RelativeToolTip": "RayTracing\\Camera.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAYwDsAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwCIAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-14T17:18:47.766Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BRDF.cs",
-              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\BRDF.cs",
-              "RelativeDocumentMoniker": "RayTracing\\BRDF.cs",
-              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\BRDF.cs",
-              "RelativeToolTip": "RayTracing\\BRDF.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAkwBMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T15:31:05.725Z",
               "EditorCaption": ""
             },
             {
@@ -115,9 +102,22 @@
               "RelativeDocumentMoniker": "RayTracing\\CameraRaycaster.cs",
               "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\CameraRaycaster.cs",
               "RelativeToolTip": "RayTracing\\CameraRaycaster.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAYwCEAAACdAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAgwB0AAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-01T14:46:14.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "BRDF.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\RayTracing\\BRDF.cs",
+              "RelativeDocumentMoniker": "RayTracing\\BRDF.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\RayTracing\\BRDF.cs",
+              "RelativeToolTip": "RayTracing\\BRDF.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAwBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-02T15:31:05.725Z",
               "EditorCaption": ""
             },
             {
@@ -130,8 +130,7 @@
               "RelativeToolTip": "RayTracing\\VectorColor.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAmwDUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-04T12:39:47.287Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-04T12:39:47.287Z"
             },
             {
               "$type": "Document",

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace RayTracing
 {
@@ -13,31 +14,46 @@ namespace RayTracing
             _renderObjects = renderObjects;
         }
 
-        public Vector3f CastRay(Ray ray, int maxBounces, VectorColor rayColor, Vector3f incomingLight)
+        public Vector3f CastRay(Ray ray, int maxBounces, int ramification)
         {
             HitInfo hit;
             CameraRenderObject intersectObject = GetObjectFromRay(ray, out hit);
 
             if (intersectObject != null)
             {
+                Material material = intersectObject.AppliedMaterial;
+
+                Vector3f endColor = material.Color.Rgb * material.LightIntencity;
+
                 if (maxBounces == 0)
                 {
-                    return incomingLight;
+                    return endColor;
                 }
 
-                Ray reflectedRay = RayDirectionHandle(hit);
-                incomingLight = CastRay(reflectedRay, maxBounces - 1, rayColor, incomingLight);
+                for (int i = 0; i < ramification; i++)
+                {
+                    Ray reflectedRay = RayDirectionHandle(hit);
+                    Vector3f incomingLight = CastRay(reflectedRay, maxBounces - 1, ramification);
 
-                Material material = intersectObject.AppliedMaterial;
-                VectorColor brdf = BRDF.Brdf(-hit.Normal, ray.direction, reflectedRay.direction, material.Color, material.F0, material.Roughness, material.Metalness);
+                    VectorColor brdf = BRDF.Brdf(-hit.Normal, ray.direction, reflectedRay.direction, material.Color, material.F0, material.Roughness, material.Metalness);
 
-                Vector3f color = (material.Color.Rgb * material.LightIntencity) + (brdf.Rgb * incomingLight * MathF.Max(Vector3f.Dot(reflectedRay.direction, -hit.Normal), 0));
+                    endColor += brdf.Rgb * incomingLight * MathF.Max(Vector3f.Dot(reflectedRay.direction, -hit.Normal), 0);
+                }
 
-                return new Vector3f(color.x, color.y, color.z);
+                return endColor;
+
+                //Ray reflectedRay = RayDirectionHandle(hit);
+                //incomingLight = CastRay(reflectedRay, maxBounces - 1, ramification, rayColor, incomingLight);
+
+                //VectorColor brdf = BRDF.Brdf(-hit.Normal, ray.direction, reflectedRay.direction, material.Color, material.F0, material.Roughness, material.Metalness);
+
+                //Vector3f color = (material.Color.Rgb * material.LightIntencity) + (brdf.Rgb * incomingLight * MathF.Max(Vector3f.Dot(reflectedRay.direction, -hit.Normal), 0));
+
+                //return new Vector3f(color.x, color.y, color.z);
             }
             else
             {
-                return incomingLight;
+                return Vector3f.Zero;
             }
         }
 
