@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace RayTracing
@@ -31,32 +32,40 @@ namespace RayTracing
 
             Ray ray = new Ray(Position, new Vector3f(directionX, directionY, 1));
 
-            return TraceRay(ray, 2, 5);
+            return TraceRay(ray, 8, 8);
         }
 
         private Color TraceRay(Ray ray, int raysCount, int maxBounces)
         {
             Vector3f currentColor = _raycaster.CastRay(ray, maxBounces);
 
+            int skippedCount = 0;
             int i = 1;
             while (i < raysCount)
             {
                 Vector3f rayColor = _raycaster.CastRay(ray, maxBounces);
 
-                float R = (rayColor.x + currentColor.x * i) / (i + 1);
-                float G = (rayColor.y + currentColor.y * i) / (i + 1);
-                float B = (rayColor.z + currentColor.z * i) / (i + 1);
+                if (rayColor.GetLength() != 0)
+                {
+                    float R = (rayColor.x + currentColor.x * (i - skippedCount)) / (i + 1 - skippedCount);
+                    float G = (rayColor.y + currentColor.y * (i - skippedCount)) / (i + 1 - skippedCount);
+                    float B = (rayColor.z + currentColor.z * (i - skippedCount)) / (i + 1 - skippedCount);
 
-                currentColor = new Vector3f(R, G, B);
+                    currentColor = new Vector3f(R, G, B);
+                }
+                else
+                {
+                    skippedCount++;
+                }
 
                 i++;
             }
 
-            if (currentColor.x < 0 || currentColor.y < 0 || currentColor.z < 0)
-            {
-                //Debug.WriteLine(currentColor.x + " " + currentColor.y + " " + currentColor.z);
-                //Debug.WriteLine(VectorColor.AcesFilmTonemapping(currentColor).ToBaseColor());
-            }
+            //if (currentColor.x != 0 || currentColor.y != 0 || currentColor.z != 0)
+            //{
+            //    Debug.WriteLine(currentColor);
+            //    Debug.WriteLine(VectorColor.GammaCorrection(VectorColor.AcesFilmicTonemapping(currentColor)).ToBaseColor());
+            //}
 
             return VectorColor.GammaCorrection(VectorColor.AcesFilmicTonemapping(currentColor)).ToBaseColor();
         }

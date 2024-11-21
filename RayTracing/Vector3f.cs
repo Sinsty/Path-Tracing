@@ -32,13 +32,23 @@ namespace RayTracing
             this.z = z;
         }
 
-        public static Vector3f Multiply(Vector3f a, Vector3f b)
+        public override string ToString()
         {
-            float xc = a.y * b.z - b.y * a.z;
-            float yc = a.z * b.x - b.z * a.x;
-            float zc = a.x * b.y - b.x * a.y;
+            return "(" + x.ToString() + ", " + y.ToString() + ", " + z.ToString() + ")";
+        }
+
+        public static Vector3f Cross(Vector3f a, Vector3f b)
+        {
+            float xc = a.y * b.z - a.z * b.y;
+            float yc = a.z * b.x - a.x * b.z;
+            float zc = a.x * b.y - a.y * b.x;
 
             return new Vector3f(xc, yc, zc);
+        }
+
+        public static Vector3f MultiplyByElements(Vector3f a, Vector3f b)
+        {
+            return new Vector3f(a.x * b.x, a.y * b.y, a.z * b.z);
         }
 
         public static float Dot(Vector3f a, Vector3f b)
@@ -81,19 +91,19 @@ namespace RayTracing
             return new Vector3f(a.x - b.x, a.y - b.y, a.z - b.z);
         }
 
-        public static Vector3f operator - (Vector3f a)
+        public static Vector3f operator -(Vector3f a)
         {
             return new Vector3f(-a.x, -a.y, -a.z);
         }
 
         public static Vector3f operator * (Vector3f a, Vector3f b)
         {
-            return Multiply(a, b);
+            return Cross(a, b);
         }
 
         public static Vector3f operator / (Vector3f a, Vector3f b)
         {
-            return Multiply(a, new Vector3f(1 / b.x, 1 / b.y, 1 / b.z));
+            return Cross(a, new Vector3f(1 / b.x, 1 / b.y, 1 / b.z));
         }
 
         public static float DegreesToRadians(float degrees)
@@ -126,6 +136,11 @@ namespace RayTracing
             x += b;
             y += b;
             z += b;
+        }
+
+        public static Vector3f Abs(Vector3f a)
+        {
+            return new Vector3f(MathF.Abs(a.x), MathF.Abs(a.y), MathF.Abs(a.z));
         }
 
         public void Rotate(Vector3f angle)

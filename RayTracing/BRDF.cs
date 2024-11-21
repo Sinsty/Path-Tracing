@@ -1,43 +1,53 @@
 ﻿using System;
 using System.Diagnostics;
-using static System.Windows.Forms.DataFormats;
 
 namespace RayTracing
 {
     internal static class BRDF
     {
-        public static VectorColor Brdf(Vector3f normal, Vector3f viewVector, Vector3f lightVector, VectorColor objectColor, VectorColor F0, float objectRoughtness, float objectMetalness)
+        public static VectorColor Brdf(Vector3f normal, Vector3f viewVector, Vector3f lightVector, Material material)
         {
-            F0 = new VectorColor(Vector3f.One * 0.05f) + objectColor * F0 * objectMetalness;
+            float objectMetalness = material.Metalness;
+            float objectRoughness = material.Roughness;
+            VectorColor objectColor = material.Color;
+            VectorColor F0 = material.Color * material.Metalness + new VectorColor(0.04f, 0.04f, 0.04f);
+
+            //F0 = objectColor * F0;
             //F0 = new VectorColor(0.04f, 0.04f, 0.04f);
 
-            Vector3f fresnel = FresnelFunction(lightVector, viewVector, F0);
+            Vector3f fresnel = FresnelFunction(normal, lightVector, viewVector, F0);
             Vector3f diffuseK = (Vector3f.One - fresnel) * (1 - objectMetalness);
 
-            VectorColor lambert = LambertDiffuseFunction(objectColor);
-            Vector3f cookTorrance = CookTorranceSpecularFunction(normal, viewVector, lightVector, fresnel, objectRoughtness);
+            VectorColor lambert = LambertDiffuseFunction(objectColor, lightVector, normal);
+            Vector3f cookTorrance = CookTorranceSpecularFunction(normal, viewVector, lightVector, fresnel, objectRoughness);
 
-            VectorColor brdf = new VectorColor(lambert.Rgb * diffuseK + cookTorrance);
+            VectorColor diffuseLight = new VectorColor(Vector3f.MultiplyByElements(lambert.Rgb, diffuseK));
+            //VectorColor diffuseLight = new VectorColor(lambert.Rgb * diffuseK);
 
-            //float normalDistribution = NormalDistribution(normal, viewVector, lightVector, objectRoughness);
-            //float geometryShadowing = SmithGeometryShadowing(normal, viewVector, lightVector, objectRoughness);
-            //Debug.WriteLine("BaseColor: " + objectColor.Rgb.x + " " + objectColor.Rgb.y + " " + objectColor.Rgb.z);
-            //Debug.WriteLine("Roughness: " + objectRoughness);
-            //Debug.WriteLine("Metalness: " + objectMetalness);
-            //Debug.WriteLine("CookTorrance: " + cookTorrance.x + " " + cookTorrance.y + " " + cookTorrance.z);
-            //Debug.WriteLine("LambertLight: " + lambert.Rgb.x + " " + lambert.Rgb.y + " " + lambert.Rgb.z);
-            //Debug.WriteLine("Distribution: " + normalDistribution);
-            //Debug.WriteLine("GeometryShad: " + geometryShadowing);
-            //Debug.WriteLine("FresnelFunct: " + fresnel.x + " " + fresnel.y + " " + fresnel.z);
-            //Debug.WriteLine("BRDF: " + brdf.Rgb.x + " " + brdf.Rgb.y + " " + brdf.Rgb.z);
-            //Debug.WriteLine("K diffuse: " + diffuseK.x + " " + diffuseK.y + " " + diffuseK.z);
-            //Debug.WriteLine("K diffuse * lambert: " + (lambert.Rgb * diffuseK).x + " " + (lambert.Rgb * diffuseK).y + " " + (lambert.Rgb * diffuseK).z);
-            //Debug.WriteLine("=============================================");
+            VectorColor brdf = new VectorColor(diffuseLight.Rgb + cookTorrance);
+
+            //if (/*cookTorrance.GetLength() > 0.01f && */ material.LightIntencity == 0)
+            //{
+            //    float normalDistribution = NormalDistribution(normal, viewVector, lightVector, objectRoughness);
+            //    float geometryShadowing = SmithGeometryShadowing(normal, viewVector, lightVector, objectRoughness);
+            //    Debug.WriteLine("BaseColor: " + objectColor.Rgb);
+            //    Debug.WriteLine("Roughness: " + objectRoughness);
+            //    Debug.WriteLine("Metalness: " + objectMetalness);
+            //    Debug.WriteLine("CookTorrance: " + cookTorrance);
+            //    Debug.WriteLine("LambertLight: " + lambert.Rgb);
+            //    Debug.WriteLine("Distribution: " + normalDistribution);
+            //    Debug.WriteLine("GeometryShad: " + geometryShadowing);
+            //    Debug.WriteLine("FresnelFunct: " + fresnel);
+            //    Debug.WriteLine("K diffuse: " + diffuseK);
+            //    Debug.WriteLine("Diffuse light" + diffuseLight.Rgb);
+            //    Debug.WriteLine("BRDF: " + brdf.Rgb);
+            //    Debug.WriteLine("=============================================");
+            //}
 
             return brdf;
         }
 
-        private static VectorColor LambertDiffuseFunction(VectorColor objectColor)
+        private static VectorColor LambertDiffuseFunction(VectorColor objectColor, Vector3f lightVector, Vector3f normal)
         {
             return objectColor / MathF.PI;
         }
@@ -67,7 +77,7 @@ namespace RayTracing
 
             float cosThetaH = MathF.Max(Vector3f.Dot(normal, halfWayVector), 0);
 
-            float d = cosThetaH * cosThetaH * (alpha * alpha - 1) + 1;
+            float d = (cosThetaH * cosThetaH * (alpha * alpha - 1)) + 1;
 
             float numerator = alpha * alpha;
             float denominator = MathF.PI * d * d;
@@ -94,12 +104,13 @@ namespace RayTracing
             return GeometryShadowing(normal, viewVector, roughness) * GeometryShadowing(normal, lightVector, roughness);
         }
 
-        private static Vector3f FresnelFunction(Vector3f lightVector, Vector3f viewVector, VectorColor F0)
+        private static Vector3f FresnelFunction(Vector3f normal, Vector3f lightVector, Vector3f viewVector, VectorColor F0)
         {
-            Vector3f halfWayVector = (viewVector + lightVector).GetNormalized();
-            float hDotV = MathF.Max(Vector3f.Dot(halfWayVector, viewVector), 0);
+            //Vector3f halfWayVector = (viewVector + lightVector).GetNormalized();
+            float cosTheta = MathF.Max(Vector3f.Dot(lightVector, normal), 0);
+            //float hDotV = MathF.Max(Vector3f.Dot(halfWayVector, viewVector), 0);
 
-            return F0.Rgb + (Vector3f.One - F0.Rgb) * MathF.Pow(1 - hDotV, 5);
+            return F0.Rgb + (Vector3f.One - F0.Rgb) * MathF.Pow(1 - cosTheta, 5);
         }
     }
 }

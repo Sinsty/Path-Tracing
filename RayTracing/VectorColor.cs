@@ -54,7 +54,10 @@ namespace RayTracing
 
         private static float ParameterAcesFilmicTonemapping(float x)
         {
-            float tonemappedColor = (x * (2.51f * x + 0.03f)) / (x * (2.43f * x + 0.59f) + 0.14f);
+            float numerator = x * (2.51f * x + 0.03f);
+            float denominator = x * (2.43f * x + 0.59f) + 0.14f;
+
+            float tonemappedColor = numerator / denominator;
             return MathF.Max(MathF.Min(tonemappedColor, 1), 0);
         }
 

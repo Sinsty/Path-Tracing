@@ -33,8 +33,6 @@
             TimeLeftLabel = new System.Windows.Forms.Label();
             PixelsRenderedLabel = new System.Windows.Forms.Label();
             pictureBox1 = new System.Windows.Forms.PictureBox();
-            ThreadCountNumeric = new System.Windows.Forms.NumericUpDown();
-            ChangeThreadsLabel = new System.Windows.Forms.Label();
             StartRenderButton = new System.Windows.Forms.Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -42,7 +40,6 @@
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)ThreadCountNumeric).BeginInit();
             SuspendLayout();
             // 
             // splitContainer1
@@ -63,8 +60,6 @@
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(ThreadCountNumeric);
-            splitContainer1.Panel2.Controls.Add(ChangeThreadsLabel);
             splitContainer1.Panel2.Controls.Add(StartRenderButton);
             splitContainer1.Size = new System.Drawing.Size(933, 519);
             splitContainer1.SplitterDistance = 737;
@@ -107,26 +102,6 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // ThreadCountNumeric
-            // 
-            ThreadCountNumeric.Location = new System.Drawing.Point(3, 36);
-            ThreadCountNumeric.Name = "ThreadCountNumeric";
-            ThreadCountNumeric.Size = new System.Drawing.Size(120, 23);
-            ThreadCountNumeric.TabIndex = 2;
-            ThreadCountNumeric.ValueChanged += OnThreadCountNumericValueChange;
-            // 
-            // ChangeThreadsLabel
-            // 
-            ChangeThreadsLabel.AutoSize = true;
-            ChangeThreadsLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            ChangeThreadsLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            ChangeThreadsLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            ChangeThreadsLabel.Location = new System.Drawing.Point(3, 8);
-            ChangeThreadsLabel.Name = "ChangeThreadsLabel";
-            ChangeThreadsLabel.Size = new System.Drawing.Size(102, 25);
-            ChangeThreadsLabel.TabIndex = 1;
-            ChangeThreadsLabel.Text = "Use Treads";
-            // 
             // StartRenderButton
             // 
             StartRenderButton.Location = new System.Drawing.Point(104, 483);
@@ -149,11 +124,9 @@
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
-            splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)ThreadCountNumeric).EndInit();
             ResumeLayout(false);
         }
 
@@ -166,8 +139,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label TimeLeftLabel;
         private System.Windows.Forms.Label TimeElapsedLabel;
-        private System.Windows.Forms.Label ChangeThreadsLabel;
-        private System.Windows.Forms.NumericUpDown ThreadCountNumeric;
     }
 }
 

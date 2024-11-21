@@ -22,21 +22,30 @@ namespace RayTracing
             {
                 Material material = intersectObject.AppliedMaterial;
 
-                Vector3f endColor = material.Color.Rgb * material.LightIntencity;
+                Vector3f selfLight = material.Color.Rgb * material.LightIntencity;
 
-                if (maxBounces == 0)
+                if (maxBounces <= 0)
                 {
-                    return endColor;
+                    return selfLight;
                 }
 
-                Ray reflectedRay = RayDirectionHandle(hit);
+                Ray reflectedRay = HandleReflectedRay(hit);
                 Vector3f incomingLight = CastRay(reflectedRay, maxBounces - 1);
 
-                VectorColor brdf = BRDF.Brdf(-hit.Normal, ray.direction, reflectedRay.direction, material.Color, material.F0, material.Roughness, material.Metalness);
+                VectorColor brdf = BRDF.Brdf(-hit.Normal, ray.direction, reflectedRay.direction, material);
 
-                Vector3f color = (material.Color.Rgb * material.LightIntencity) + (brdf.Rgb * incomingLight * MathF.Max(Vector3f.Dot(reflectedRay.direction, -hit.Normal), 0));
+                Vector3f color = selfLight + (Vector3f.MultiplyByElements(brdf.Rgb, incomingLight) * MathF.Max(Vector3f.Dot(reflectedRay.direction, -hit.Normal), 0) /*  divide by reflected ray length */);
 
-                return new Vector3f(color.x, color.y, color.z);
+                //if (color.x != 0 || color.y != 0 || color.z != 0)
+                //{
+                //    Debug.WriteLine("Material color: " + material.Color.Rgb);
+                //    Debug.WriteLine("Light intencity: " + material.LightIntencity);
+                //    Debug.WriteLine("SelfLight: " + selfLight);
+                //    Debug.WriteLine("End color: " + color);
+                //    Debug.WriteLine("=============");
+                //}
+
+                return color;
             }
             else
             {
@@ -64,7 +73,7 @@ namespace RayTracing
             return closestObject;
         }
 
-        private Ray RayDirectionHandle(HitInfo rayObjectHit)
+        private Ray HandleReflectedRay(HitInfo rayObjectHit)
         {
             Vector3f reflectedRayDirection = getRandomPointInSphere(rayObjectHit.Point - rayObjectHit.Normal) - rayObjectHit.Point;
 
