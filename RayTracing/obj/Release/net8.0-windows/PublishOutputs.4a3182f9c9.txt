@@ -1,0 +1,6 @@
+D:\YLink\Новая папка\RayTracing.exe
+D:\YLink\Новая папка\RayTracing.dll
+D:\YLink\Новая папка\RayTracing.deps.json
+D:\YLink\Новая папка\RayTracing.runtimeconfig.json
+D:\YLink\Новая папка\RayTracing.dll.config
+D:\YLink\Новая папка\RayTracing.pdb

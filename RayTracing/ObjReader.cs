@@ -8,14 +8,22 @@ namespace RayTracing
 {
     internal class ObjReader
     {
-        static public (Vector3f[], Vector3f[]) Parse(string path)
+        //<summary>
+        //1 - vertices
+        //2 - faces (Vertices indexes)
+        //3 - normals
+        //4 - faces normals indexes
+        //</summary>
+        static public (Vector3f[], int[], Vector3f[], int[]) Parse(string path)
         {
             string[] objLines = File.ReadAllLines(path);
 
             string file = File.ReadAllText(path);
 
             List<Vector3f> vertices = new List<Vector3f>();
-            List<Vector3f> faces = new List<Vector3f>();
+            List<Vector3f> normals = new List<Vector3f>();
+            List<int> faces = new List<int>();
+            List<int> normalsIndexes = new List<int>();
 
             foreach (string line in objLines)
             {
@@ -24,13 +32,22 @@ namespace RayTracing
                     vertices.Add(ParseVertices(line));
                 }
 
+                if (line.StartsWith("vn "))
+                {
+                    normals.Add(ParseNormals(line));
+                }
+
                 if (line.StartsWith("f "))
                 {
-                    faces.Add(ParseFaces(line));
+                    (int[] face, int normalIndex) = ParseFaces(line);
+                    faces.Add(face[0]);
+                    faces.Add(face[1]);
+                    faces.Add(face[2]);
+                    normalsIndexes.Add(normalIndex);
                 }
             }
 
-            return (vertices.ToArray(), faces.ToArray());
+            return (vertices.ToArray(), faces.ToArray(), normals.ToArray(), normalsIndexes.ToArray());
         }
 
         private static Vector3f ParseVertices(string line)
@@ -50,7 +67,28 @@ namespace RayTracing
             return new Vector3f(x, y, z);
         }
 
-        private static Vector3f ParseFaces(string line)
+        private static Vector3f ParseNormals(string line)
+        {
+            if (line.StartsWith("vn ") == false)
+            {
+                throw new ArgumentException("Line doesn't contain normals");
+            }
+
+            line = line.Remove(0, 3);
+            string[] direction = line.Split(" ");
+
+            float x = float.Parse(direction[0], CultureInfo.InvariantCulture.NumberFormat);
+            float y = float.Parse(direction[1], CultureInfo.InvariantCulture.NumberFormat);
+            float z = float.Parse(direction[2], CultureInfo.InvariantCulture.NumberFormat);
+
+            return new Vector3f(x, y, z);
+        }
+
+        //<summary>
+        //1 - faces
+        //2 - normals
+        //</summary>
+        private static (int[], int) ParseFaces(string line)
         {
             if (line.StartsWith("f ") == false)
             {
@@ -60,11 +98,11 @@ namespace RayTracing
             line = line.Remove(0, 2);
             string[] vertices = line.Split(" ");
 
-            float x = int.Parse(vertices[0].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
-            float y = int.Parse(vertices[1].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
-            float z = int.Parse(vertices[2].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
+            int x = int.Parse(vertices[0].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
+            int y = int.Parse(vertices[1].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
+            int z = int.Parse(vertices[2].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
 
-            return new Vector3f(x, y, z);
+            return ([x, y, z], int.Parse(vertices[0].Split("/")[2], CultureInfo.InvariantCulture.NumberFormat));
         }
     }
 }

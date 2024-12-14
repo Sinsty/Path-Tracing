@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace RayTracing
 {
@@ -25,17 +26,22 @@ namespace RayTracing
 
             if (discriminant < 0)
             {
-                hit = new HitInfo(0, Vector3f.Zero, Vector3f.Zero);
+                hit = new HitInfo();
                 return false;
             }
             else
             {
-                float distance = (-b - MathF.Sqrt(discriminant)) / (2 * a);
+                float t = (-b - MathF.Sqrt(discriminant)) / (2 * a);
 
-                Vector3f hitPosition = ray.origin + ray.direction * distance;
+                if (t < 0)
+                {
+                    hit = new HitInfo();
+                    return false;
+                }
+                Vector3f hitPosition = ray.origin + ray.direction * t;
                 Vector3f normal = hitPosition - Position;
 
-                hit = new HitInfo(distance, hitPosition, normal);
+                hit = new HitInfo(t, hitPosition, normal);
 
                 return true;
             }

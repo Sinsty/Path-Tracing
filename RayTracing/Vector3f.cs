@@ -5,6 +5,13 @@ namespace RayTracing
 {
     internal struct Vector3f
     {
+        public enum Axis
+        {
+            X,
+            Y,
+            Z,
+        }
+
         private static readonly Vector3f _zeroVector = new Vector3f(0f, 0f, 0f);
         private static readonly Vector3f _oneVector = new Vector3f(1f, 1f, 1f);
         private static readonly Vector3f _upVector = new Vector3f(0f, 1f, 0f);
@@ -39,11 +46,11 @@ namespace RayTracing
 
         public static Vector3f Cross(Vector3f a, Vector3f b)
         {
-            float xc = a.y * b.z - a.z * b.y;
-            float yc = a.z * b.x - a.x * b.z;
-            float zc = a.x * b.y - a.y * b.x;
+            float cx = a.y * b.z - a.z * b.y;
+            float cy = a.z * b.x - a.x * b.z;
+            float cz = a.x * b.y - a.y * b.x;
 
-            return new Vector3f(xc, yc, zc);
+            return new Vector3f(cx, cy, cz);
         }
 
         public static Vector3f MultiplyByElements(Vector3f a, Vector3f b)
@@ -61,6 +68,21 @@ namespace RayTracing
             return vector - 2 * Dot(vector, normal) * normal;
         }
 
+        public static Vector3f AxisToVector(Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.X:
+                    return Right;
+                case Axis.Y:
+                    return Up;
+                case Axis.Z:
+                    return Forward;
+            }
+
+            throw new ArgumentException(nameof(axis));
+        }
+
         public static Vector3f operator * (Vector3f a, float b)
         {
             return new Vector3f(a.x * b, a.y * b, a.z * b);
@@ -74,6 +96,16 @@ namespace RayTracing
         public static Vector3f operator * (float a, Vector3f b)
         {
             return new Vector3f(b.x * a, b.y * a, b.z * a);
+        }
+
+        public static bool operator ==(Vector3f a, Vector3f b)
+        {
+            return a.x == b.x && a.y == b.y && a.z == b.z;
+        }
+
+        public static bool operator !=(Vector3f a, Vector3f b)
+        {
+            return a.x != b.x || a.y != b.y || a.z != b.z;
         }
 
         public static Vector3f operator / (Vector3f a, float b)
@@ -111,6 +143,11 @@ namespace RayTracing
             return degrees * MathF.PI / 180f;
         }
 
+        public static float Distance(Vector3f a, Vector3f b)
+        {
+            return MathF.Sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y) + (a.z - b.z)*(a.z - b.z));
+        }
+
         //Vector length (magnitude)
         public float GetLength()
         {
@@ -136,6 +173,21 @@ namespace RayTracing
             x += b;
             y += b;
             z += b;
+        }
+
+        public float GetAxis(Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.X:
+                    return x;
+                case Axis.Y:
+                    return y;
+                case Axis.Z:
+                    return z;
+            }
+
+            throw new ArgumentException(nameof(axis));
         }
 
         public static Vector3f Abs(Vector3f a)
@@ -172,6 +224,35 @@ namespace RayTracing
             }
         }
 
+        public void Rotate(Vector3f angle, Vector3f aroundPoint)
+        {
+            angle.x = DegreesToRadians(angle.x);
+            angle.y = DegreesToRadians(angle.y);
+            angle.z = DegreesToRadians(angle.z);
+
+            if (angle.x != 0)
+            {
+                float tempY = (y - aroundPoint.y) * MathF.Cos(angle.x) - (z - aroundPoint.z) * MathF.Sin(angle.x);
+                z = (y - aroundPoint.y) * MathF.Sin(angle.x) + (z - aroundPoint.z) * MathF.Cos(angle.x);
+
+                y = tempY;
+            }
+            if (angle.y != 0)
+            {
+                float tempX = (x - aroundPoint.x) * MathF.Cos(angle.y) + (z - aroundPoint.z) * MathF.Sin(angle.y);
+                z = -(x - aroundPoint.x) * MathF.Sin(angle.y) + (z - aroundPoint.z) * MathF.Cos(angle.y);
+
+                x = tempX;
+            }
+            if (angle.z != 0)
+            {
+                float tempX = (x - aroundPoint.x) * MathF.Cos(angle.z) - (y - aroundPoint.y) * MathF.Sin(angle.z);
+                y = (x - aroundPoint.x) * MathF.Sin(angle.z) + (y - aroundPoint.y) * MathF.Cos(angle.z);
+
+                x = tempX;
+            }
+        }
+
         public static Vector3f ClampValues(Vector3f vector, float min, float max)
         {
             vector.x = MathF.Max(MathF.Min(vector.x, max), min);
@@ -181,11 +262,13 @@ namespace RayTracing
             return vector;
         }
 
-        public void ClampValuesFromVector(Vector3f minVector, Vector3f maxVector)
+        public static Vector3f ClampValuesFromVector(Vector3f vector, Vector3f minVector, Vector3f maxVector)
         {
-            x = MathF.Max(MathF.Min(x, maxVector.x), minVector.x);
-            y = MathF.Max(MathF.Min(y, maxVector.y), minVector.y);
-            z = MathF.Max(MathF.Min(z, maxVector.z), minVector.z);
+            vector.x = MathF.Max(MathF.Min(vector.x, maxVector.x), minVector.x);
+            vector.y = MathF.Max(MathF.Min(vector.y, maxVector.y), minVector.y);
+            vector.z = MathF.Max(MathF.Min(vector.z, maxVector.z), minVector.z);
+
+            return vector;
         }
     }
 }

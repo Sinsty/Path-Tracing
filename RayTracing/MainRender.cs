@@ -1,0 +1,159 @@
+﻿using System;
+using RayTracing.Tree;
+using System.Threading;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+namespace RayTracing
+{
+    internal static class MainRender
+    {
+        public static Action<Bitmap> OnEndRendering;
+
+        public static int ImageWidth => _currentScene.Camera.ImageWidth;
+        public static int ImageHeight => _currentScene.Camera.ImageHeight;
+        public static Scene Scene => _currentScene;
+        public static bool IsRendering { get; private set; }
+        public static float RenderingTime { get; private set; }
+        public static int RenderedPixels { get; private set; }
+        public static float RenderTimeLeft { get; private set; }
+        public static float RenderTimeElapsed { get; private set; }
+
+        private static int _samplesCount;
+        private static Thread _renderThread;
+
+        private static Scene _currentScene;
+
+        public static void StartRender(int imageWidth, int imageHeight, int samples, Scene scene)
+        {
+            if (IsRendering)
+                return;
+
+            if (imageWidth < 0)
+                throw new ArgumentOutOfRangeException(nameof(imageWidth));
+            if (imageHeight < 0)
+                throw new ArgumentOutOfRangeException(nameof(imageHeight));
+            if (samples < 0)
+                throw new ArgumentOutOfRangeException(nameof(samples));
+            if (scene == null)
+                throw new NullReferenceException(nameof(scene));
+
+            _samplesCount = samples;
+
+            _currentScene = scene;
+
+            _renderThread = new Thread(Render);
+            _renderThread.IsBackground = true;
+            _renderThread.Priority = ThreadPriority.AboveNormal;
+            _renderThread.Start();
+        }
+
+        private static void Render()
+        {
+            IsRendering = true;
+
+            Bitmap image = new Bitmap(_currentScene.Camera.ImageWidth, _currentScene.Camera.ImageHeight, PixelFormat.Format24bppRgb);
+
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+            BitmapData imageData = image.LockBits(rect, ImageLockMode.ReadWrite, image.PixelFormat);
+            IntPtr pointer = imageData.Scan0;
+
+            int bytes = Math.Abs(imageData.Stride) * image.Height;
+            byte[] rgbValues = new byte[bytes];
+            Marshal.Copy(pointer, rgbValues, 0, bytes);
+
+            float renderTime = 0f;
+
+            Stopwatch rowRenderWatch = new Stopwatch();
+            Stopwatch allRenderingWatch = new Stopwatch();
+            allRenderingWatch.Start();
+
+            List<Triangle> triangles = new List<Triangle>();
+
+            foreach (var sceneObject in _currentScene.Objects)
+            {
+                if (sceneObject is Triangle)
+                {
+                    triangles.Add((Triangle)sceneObject);
+                }
+
+                if (sceneObject is Mesh)
+                {
+                    Mesh mesh = (Mesh)sceneObject;
+                    foreach (Triangle tri in mesh.Triangles)
+                    {
+                        triangles.Add(tri);
+                    }
+                }
+            }
+
+            KDTree tree = new KDTree();
+            tree.CreateTree(triangles.ToArray());
+
+            for (int y = 0; y < image.Height; y++)
+            {
+                rowRenderWatch.Restart();
+
+                Parallel.For(0, image.Width, (int x) =>
+                {
+                    SetPixel(x, y, rgbValues, imageData, RenderPixel(x, y));
+                    RenderedPixels++;
+                });
+
+                rowRenderWatch.Stop();
+
+                renderTime = (renderTime * y + (float)rowRenderWatch.Elapsed.TotalSeconds) / (y + 1);
+
+                RenderTimeLeft = renderTime * (image.Height - y);
+                RenderTimeElapsed = (float)allRenderingWatch.Elapsed.TotalSeconds;
+            }
+
+            RenderTimeLeft = 0;
+            allRenderingWatch.Stop();
+
+            IsRendering = false;
+
+            Marshal.Copy(rgbValues, 0, pointer, bytes);
+            image.UnlockBits(imageData);
+
+            OnEndRendering?.Invoke(image);
+        }
+
+        private static void SetPixel(int x, int y, byte[] rgbValues, BitmapData data, Color color)
+        {
+            int pixel = x * 3 + y * data.Stride;
+            rgbValues[pixel] = color.B;
+            rgbValues[pixel + 1] = color.G;
+            rgbValues[pixel + 2] = color.R;
+        }
+
+        private static Color RenderPixel(int x, int y)
+        {
+            CameraRaycastInfo firstRaycastInfo = _currentScene.Camera.TraceRay(x, y);
+
+            Vector3f currentColor = _currentScene.Camera.TraceRay(x, y).Color;
+
+            if (firstRaycastInfo.IsHit == false) return Color.Black;
+
+            int i = 1;
+            while (i < _samplesCount)
+            {
+                Vector3f rayColor = _currentScene.Camera.TraceRay(x, y).Color;
+
+                float R = (rayColor.x + currentColor.x * (i)) / (i + 1);
+                float G = (rayColor.y + currentColor.y * (i)) / (i + 1);
+                float B = (rayColor.z + currentColor.z * (i)) / (i + 1);
+
+                currentColor = new Vector3f(R, G, B);
+
+                i++;
+            }
+
+            return VectorColor.GammaCorrection(VectorColor.AcesFilmicTonemapping(currentColor)).ToBaseColor();
+        }
+    }
+}

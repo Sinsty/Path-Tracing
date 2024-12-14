@@ -13,6 +13,13 @@
             Normal = Vector3f.Zero;
         }
 
+        public HitInfo()
+        {
+            Distance = 0;
+            Point = Vector3f.Zero;
+            Normal = Vector3f.Zero;
+        }
+
         public HitInfo(float distance, Vector3f point, Vector3f normal)
         {
             Distance = distance;
