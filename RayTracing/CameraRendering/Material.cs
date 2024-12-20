@@ -1,8 +1,8 @@
-﻿namespace RayTracing
+﻿namespace RayTracing.CameraRendering
 {
     internal class Material
     {
-        public VectorColor Color {  get; private set; }
+        public VectorColor Color { get; private set; }
         public float Roughness;
         public float Metalness;
         public float LightIntencity;

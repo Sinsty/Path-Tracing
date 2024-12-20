@@ -1,18 +1,26 @@
 ﻿using System;
+using RayTracing.CameraRendering;
+using RayTracing.ThreeDimensionalTree;
 
-namespace RayTracing
+namespace RayTracing.Geometry
 {
-    internal class Sphere : ICameraRenderObject
+    internal class Sphere : IBoundingBoxable
     {
         public Vector3f Position { get; set; }
         public float Radius { get; private set; }
         public Material AppliedMaterial { get; set; }
+
+        public Vector3f BoundingBoxMin { get; private set; }
+        public Vector3f BoundingBoxMax { get; private set; }
 
         public Sphere(Vector3f position, float radius, Material material)
         {
             Position = position;
             Radius = radius;
             AppliedMaterial = material;
+
+            BoundingBoxMax = Position + Vector3f.One * Radius;
+            BoundingBoxMin = Position - Vector3f.One * Radius;
         }
 
         public bool RayIntersect(Ray ray, out HitInfo hit)

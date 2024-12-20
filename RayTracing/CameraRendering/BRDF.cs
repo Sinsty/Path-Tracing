@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RayTracing
+namespace RayTracing.CameraRendering
 {
     internal static class BRDF
     {
@@ -46,7 +46,7 @@ namespace RayTracing
         // GGX/Trowbridge-reitz model
         private static float NormalDistribution(Vector3f normal, float nDotH, float alpha)
         {
-            float d = (nDotH * nDotH * (alpha * alpha - 1)) + 1;
+            float d = nDotH * nDotH * (alpha * alpha - 1) + 1;
 
             float numerator = alpha * alpha;
             float denominator = MathF.PI * d * d;
@@ -60,7 +60,7 @@ namespace RayTracing
         {
             float k = alpha / 2;
             float numerator = nDotX;
-            float denominator = (nDotX * (1 - k)) + k;
+            float denominator = nDotX * (1 - k) + k;
 
             return numerator / MathF.Max(denominator, 0.00001f);
         }

@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿using RayTracing.CameraRendering;
 
-namespace RayTracing
+namespace RayTracing.Geometry
 {
     internal class Mesh : ICompositeObject, ICameraRenderObject
     {

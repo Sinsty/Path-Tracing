@@ -2,9 +2,8 @@
 using System.Threading;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
+using RayTracing.CameraRendering;
+using RayTracing.Geometry;
 
 namespace RayTracing
 {
@@ -35,10 +34,8 @@ namespace RayTracing
 
             ICameraRenderObject[] sceneObjects =
             [
-                //new Triangle(new Vector3f(0, 0, 5), [new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 0, 0)], meshMaterial),
-                //new Sphere(new Vector3f(-2, 3, 0), 1, sphereMaterial),
-                new Triangle(new Vector3f(-2, 3, 0), [new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 0, 0)], sphereMaterial),
-                new Mesh(new Vector3f(1, 0, 5), @"D:\YLink\RayTracing\RayTracing\src\Icosphere.obj", meshMaterial)
+                new Sphere(new Vector3f(-2, 3, 0), 1, sphereMaterial),
+                new Mesh(new Vector3f(1, 0, 5), @"D:\YLink\RayTracing\RayTracing\src\Monkey180.obj", meshMaterial)
             ];
 
             Camera camera = new Camera(Vector3f.Zero, 60, 1000, (int)imageWidthNumericUpDown.Value, (int)imageHeightNumericUpDown.Value, (int)rayBouncesNumericUpDown.Value);

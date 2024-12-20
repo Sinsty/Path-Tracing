@@ -1,4 +1,4 @@
-﻿namespace RayTracing
+﻿namespace RayTracing.CameraRendering
 {
     internal interface ICameraRenderObject
     {

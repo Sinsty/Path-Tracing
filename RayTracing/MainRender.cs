@@ -6,6 +6,10 @@ using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using RayTracing.CameraRendering;
+using RayTracing.Geometry;
+using RayTracing.ThreeDimensionalTree;
+
 
 namespace RayTracing
 {
@@ -119,6 +123,7 @@ namespace RayTracing
 
             RenderTimeLeft = 0;
             allRenderingWatch.Stop();
+            RenderedPixels = image.Width, * image.Height
 
             IsRendering = false;
 

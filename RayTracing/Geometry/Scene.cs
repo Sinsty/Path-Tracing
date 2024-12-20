@@ -1,6 +1,7 @@
 ﻿using System;
+using RayTracing.CameraRendering;
 
-namespace RayTracing
+namespace RayTracing.Geometry
 {
     internal class Scene
     {

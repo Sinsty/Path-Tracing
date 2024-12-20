@@ -1,4 +1,4 @@
-﻿namespace RayTracing
+﻿namespace RayTracing.CameraRendering
 {
     internal struct HitInfo
     {
@@ -26,5 +26,5 @@
             Point = point;
             Normal = normal.GetNormalized();
         }
-    } 
+    }
 }

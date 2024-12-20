@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Drawing;
 
-namespace RayTracing
+namespace RayTracing.CameraRendering
 {
     internal class Camera
     {
         public Vector3f Position { get; set; }
         public float Fov { get; private set; }
         public float MaxViewDistance { get; private set; }
+
+        public int CurrentImageWidth => _currentImageWidth;
+        public int CurrentImageHeight => _currentImageHeight;
+        public int CurrentRayBouncesCount => _currentRayBouncesCount;
 
         private int _currentImageWidth;
         private int _currentImageHeight;
@@ -43,9 +46,12 @@ namespace RayTracing
         public int RayBouncesCount
         {
             get { return _rayBouncesCount; }
-            set { if (value < 0 ) 
-                {   throw new ArgumentOutOfRangeException(nameof(value)); } 
-                _rayBouncesCount = value; }
+            set
+            {
+                if (value < 0)
+                { throw new ArgumentOutOfRangeException(nameof(value)); }
+                _rayBouncesCount = value;
+            }
         }
 
         #endregion RaycastParameters
@@ -62,7 +68,7 @@ namespace RayTracing
             RayBouncesCount = rayBouncesCount;
 
             UpdateValues();
-            MainRender.OnEndRendering += (Bitmap image) => UpdateValues();
+            MainRender.OnEndRendering += (image) => UpdateValues();
         }
 
         public CameraRaycastInfo TraceRay(int x, int y)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace RayTracing
+namespace RayTracing.CameraRendering
 {
     internal static class CameraRaycaster
     {

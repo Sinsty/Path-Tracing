@@ -1,7 +1,10 @@
-﻿using RayTracing;
+﻿using RayTracing.CameraRendering;
 
-internal interface IBoundingBoxable : ICameraRenderObject
+namespace RayTracing.ThreeDimensionalTree
 {
-    public Vector3f BoundingBoxMin { get; }
-    public Vector3f BoundingBoxMax { get; }
+    internal interface IBoundingBoxable : ICameraRenderObject
+    {
+        public Vector3f BoundingBoxMin { get; }
+        public Vector3f BoundingBoxMax { get; }
+    }
 }

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Drawing;
 
-namespace RayTracing
+namespace RayTracing.CameraRendering
 {
     internal struct VectorColor
     {
         private Vector3f _color;
 
-		public Vector3f Rgb
-		{
-			get { return _color; }
-			set { _color = SetColor(value); }
-		}
+        public Vector3f Rgb
+        {
+            get { return _color; }
+            set { _color = SetColor(value); }
+        }
 
         public VectorColor(Vector3f rgbColor)
         {
-			Rgb = rgbColor;
+            Rgb = rgbColor;
         }
 
         public static VectorColor operator *(VectorColor a, VectorColor b)
@@ -68,13 +68,13 @@ namespace RayTracing
 
 
         public Color ToBaseColor()
-		{
+        {
             return Color.FromArgb((int)MathF.Round(Rgb.x * 255), (int)MathF.Round(Rgb.y * 255), (int)MathF.Round(Rgb.z * 255));
         }
 
-		private Vector3f SetColor(Vector3f color)
-		{
+        private Vector3f SetColor(Vector3f color)
+        {
             return Vector3f.ClampValues(color, 0, 1);
-		}
-	}
+        }
+    }
 }

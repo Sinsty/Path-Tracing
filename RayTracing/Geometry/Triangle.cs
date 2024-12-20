@@ -1,6 +1,8 @@
 ﻿using System;
+using RayTracing.CameraRendering;
+using RayTracing.ThreeDimensionalTree;
 
-namespace RayTracing
+namespace RayTracing.Geometry
 {
     internal class Triangle : IBoundingBoxable
     {
@@ -10,11 +12,14 @@ namespace RayTracing
 
 
         private Vector3f _position;
-        public Vector3f Position 
-        { 
-            get { return _position; } 
-            set { _position = value; 
-                  UpdatePositionedVertices(); } 
+        public Vector3f Position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value;
+                UpdatePositionedVertices();
+            }
         }
         public Material AppliedMaterial { get; set; }
         public Vector3f BoundingBoxMax { get; protected set; }
@@ -55,7 +60,7 @@ namespace RayTracing
                 hit = new HitInfo();
                 return false;
             }
-                
+
             float invDet = 1 / det;
             Vector3f s = ray.origin - v0p;
             float u = invDet * Vector3f.Dot(s, directionCrossEdge2);
