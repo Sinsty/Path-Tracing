@@ -33,8 +33,9 @@ namespace RayTracing
             float nDotL = MathF.Max(Vector3f.Dot(normal, lightVector), 0);
             float nDotH = MathF.Max(Vector3f.Dot(normal, halfWayVector), 0);
 
-            float D = NormalDistribution(normal, nDotH, roughness);
-            float G = SmithGeometryShadowing(normal, nDotV, nDotL, roughness);
+            float alpha = roughness * roughness;
+            float D = NormalDistribution(normal, nDotH, alpha);
+            float G = SmithGeometryShadowing(normal, nDotV, nDotL, alpha);
 
             Vector3f numerator = D * G * fresnel;
             float denominator = 4 * nDotV * nDotL;
@@ -43,10 +44,8 @@ namespace RayTracing
         }
 
         // GGX/Trowbridge-reitz model
-        private static float NormalDistribution(Vector3f normal, float nDotH, float roughness)
+        private static float NormalDistribution(Vector3f normal, float nDotH, float alpha)
         {
-            float alpha = roughness * roughness;
-
             float d = (nDotH * nDotH * (alpha * alpha - 1)) + 1;
 
             float numerator = alpha * alpha;
@@ -57,9 +56,8 @@ namespace RayTracing
 
         //Schlick-GGX model (Smith model + Shlick-Beckman model)
         // "x" variable is view or light vector (to calculate for both sides)
-        private static float GeometryShadowing(Vector3f normal, float nDotX, float roughness)
+        private static float GeometryShadowing(Vector3f normal, float nDotX, float alpha)
         {
-            float alpha = roughness * roughness;
             float k = alpha / 2;
             float numerator = nDotX;
             float denominator = (nDotX * (1 - k)) + k;
@@ -67,9 +65,9 @@ namespace RayTracing
             return numerator / MathF.Max(denominator, 0.00001f);
         }
 
-        private static float SmithGeometryShadowing(Vector3f normal, float nDotV, float nDotL, float roughness)
+        private static float SmithGeometryShadowing(Vector3f normal, float nDotV, float nDotL, float alpha)
         {
-            return GeometryShadowing(normal, nDotV, roughness) * GeometryShadowing(normal, nDotL, roughness);
+            return GeometryShadowing(normal, nDotV, alpha) * GeometryShadowing(normal, nDotL, alpha);
         }
 
         //Shlick's approximation

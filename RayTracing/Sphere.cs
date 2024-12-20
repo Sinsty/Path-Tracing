@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace RayTracing
 {
-    internal class Sphere : CameraRenderObject
+    internal class Sphere : ICameraRenderObject
     {
-        public override Vector3f Position { get; set; }
+        public Vector3f Position { get; set; }
         public float Radius { get; private set; }
-        public override Material AppliedMaterial { get; protected set; }
+        public Material AppliedMaterial { get; set; }
 
         public Sphere(Vector3f position, float radius, Material material)
         {
@@ -16,7 +15,7 @@ namespace RayTracing
             AppliedMaterial = material;
         }
 
-        public override bool RayIntersect(Ray ray, out HitInfo hit)
+        public bool RayIntersect(Ray ray, out HitInfo hit)
         {
             Vector3f oc = ray.origin - Position;
             float a = Vector3f.Dot(ray.direction, ray.direction);

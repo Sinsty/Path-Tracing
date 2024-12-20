@@ -1,23 +1,24 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace RayTracing
 {
-    internal class Triangle : CameraRenderObject
+    internal class Triangle : IBoundingBoxable
     {
         public Vector3f point1 => v0p;
         public Vector3f point2 => v1p;
         public Vector3f point3 => v2p;
 
-        public override Material AppliedMaterial { get; protected set; }
 
         private Vector3f _position;
-        public override Vector3f Position 
+        public Vector3f Position 
         { 
             get { return _position; } 
             set { _position = value; 
                   UpdatePositionedVertices(); } 
         }
+        public Material AppliedMaterial { get; set; }
+        public Vector3f BoundingBoxMax { get; protected set; }
+        public Vector3f BoundingBoxMin { get; protected set; }
 
         private Vector3f v0, v1, v2;
         private Vector3f v0p, v1p, v2p;
@@ -30,11 +31,18 @@ namespace RayTracing
             v0 = vertices[0];
             v1 = vertices[1];
             v2 = vertices[2];
-
             UpdatePositionedVertices();
+
+            BoundingBoxMax = new Vector3f(MathF.Max(point1.x, MathF.Max(point2.x, point3.x)),
+                                          MathF.Max(point1.y, MathF.Max(point2.y, point3.y)),
+                                          MathF.Max(point1.z, MathF.Max(point2.z, point3.z)));
+
+            BoundingBoxMin = new Vector3f(MathF.Min(point1.x, MathF.Min(point2.x, point3.x)),
+                                          MathF.Min(point1.y, MathF.Min(point2.y, point3.y)),
+                                          MathF.Min(point1.z, MathF.Min(point2.z, point3.z)));
         }
 
-        public override bool RayIntersect(Ray ray, out HitInfo hit)
+        public bool RayIntersect(Ray ray, out HitInfo hit)
         {
             Vector3f edge1 = v1p - v0p;
             Vector3f edge2 = v2p - v0p;
@@ -47,7 +55,7 @@ namespace RayTracing
                 hit = new HitInfo();
                 return false;
             }
-
+                
             float invDet = 1 / det;
             Vector3f s = ray.origin - v0p;
             float u = invDet * Vector3f.Dot(s, directionCrossEdge2);

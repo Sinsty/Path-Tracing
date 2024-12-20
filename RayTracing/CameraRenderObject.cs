@@ -1,10 +1,9 @@
 ﻿namespace RayTracing
 {
-    internal abstract class CameraRenderObject
+    internal interface ICameraRenderObject
     {
-        public abstract Vector3f Position { get; set; }
-        public abstract Material AppliedMaterial { get; protected set; }
-
-        public abstract bool RayIntersect(Ray ray, out HitInfo hit);
+        public Vector3f Position { get; set; }
+        public Material AppliedMaterial { get; protected set; }
+        public bool RayIntersect(Ray ray, out HitInfo hit);
     }
 }

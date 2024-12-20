@@ -7,10 +7,13 @@ namespace RayTracing
     {
         private static Random _random = new Random();
 
+
+        //pdf = cos(theta) / pi
+        //
         public static CameraRaycastInfo CastRay(Ray ray, int maxBounces)
         {
             HitInfo hit;
-            CameraRenderObject intersectObject = GetObjectFromRay(ray, out hit);
+            ICameraRenderObject intersectObject = MainRender.AABBTree.FindRayIntersection(ray, out hit);
 
             if (intersectObject != null)
             {
@@ -47,26 +50,6 @@ namespace RayTracing
             {
                 return new CameraRaycastInfo(Vector3f.Zero, 0, false);
             }
-        }
-
-        private static CameraRenderObject GetObjectFromRay(Ray ray, out HitInfo hit)
-        {
-            CameraRenderObject closestObject = null;
-            hit = new HitInfo(float.MaxValue);
-
-            foreach (CameraRenderObject sceneObject in MainRender.Scene.Objects)
-            {
-                if (sceneObject.RayIntersect(ray, out HitInfo objectHit))
-                {
-                    if (objectHit.Distance < hit.Distance)
-                    {
-                        closestObject = sceneObject;
-                        hit = objectHit;
-                    }
-                }
-            }
-
-            return closestObject;
         }
 
         private static Ray HandleReflectedRay(HitInfo rayObjectHit)

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
 namespace RayTracing
 {
@@ -32,15 +33,13 @@ namespace RayTracing
             Material sphereMaterial = new Material(new VectorColor(1f, 1f, 1f), 2f, 0f, 1000f);
             Material meshMaterial = new Material(new VectorColor(0.2f, 0.2f, 1f), 1f, 0f, 0f);
 
-            CameraRenderObject[] sceneObjects =
+            ICameraRenderObject[] sceneObjects =
             [
                 //new Triangle(new Vector3f(0, 0, 5), [new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 0, 0)], meshMaterial),
-                new Sphere(new Vector3f(-2, 3, 0), 1, sphereMaterial),
-                new Mesh(new Vector3f(1, 0, 5), @"D:\YLink\RayTracing\RayTracing\src\Monkey180.obj", meshMaterial)
+                //new Sphere(new Vector3f(-2, 3, 0), 1, sphereMaterial),
+                new Triangle(new Vector3f(-2, 3, 0), [new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 0, 0)], sphereMaterial),
+                new Mesh(new Vector3f(1, 0, 5), @"D:\YLink\RayTracing\RayTracing\src\Icosphere.obj", meshMaterial)
             ];
-
-            //List<CameraRenderObject> sceneObjects = new List<CameraRenderObject>(new Polygon(new Vector3f(0, 0, 5), [new Vector3f(0, 0, 0), new Vector3f(0, 1, 0), new Vector3f(1, 1, 0), new Vector3f(1, 0, 0)], meshMaterial).Triangulate());
-            //sceneObjects.Add(new Sphere(new Vector3f(-2, 3, 0), 1, sphereMaterial));
 
             Camera camera = new Camera(Vector3f.Zero, 60, 1000, (int)imageWidthNumericUpDown.Value, (int)imageHeightNumericUpDown.Value, (int)rayBouncesNumericUpDown.Value);
 

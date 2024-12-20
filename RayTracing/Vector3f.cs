@@ -44,6 +44,22 @@ namespace RayTracing
             return "(" + x.ToString() + ", " + y.ToString() + ", " + z.ToString() + ")";
         }
 
+        public static Vector3f Max(Vector3f a, Vector3f b)
+        {
+            if (a.GetLength() > b.GetLength())
+                return a;
+
+            return b;
+        }
+
+        public static Vector3f Min(Vector3f a, Vector3f b)
+        {
+            if (a.GetLength() < b.GetLength())
+                return a;
+
+            return b;
+        }
+
         public static Vector3f Cross(Vector3f a, Vector3f b)
         {
             float cx = a.y * b.z - a.z * b.y;
@@ -123,7 +139,7 @@ namespace RayTracing
             return new Vector3f(a.x - b.x, a.y - b.y, a.z - b.z);
         }
 
-        public static Vector3f operator -(Vector3f a)
+        public static Vector3f operator - (Vector3f a)
         {
             return new Vector3f(-a.x, -a.y, -a.z);
         }
@@ -135,7 +151,7 @@ namespace RayTracing
 
         public static Vector3f operator / (Vector3f a, Vector3f b)
         {
-            return Cross(a, new Vector3f(1 / b.x, 1 / b.y, 1 / b.z));
+            return MultiplyByElements(a, new Vector3f(1 / b.x, 1 / b.y, 1 / b.z));
         }
 
         public static float DegreesToRadians(float degrees)
@@ -185,6 +201,24 @@ namespace RayTracing
                     return y;
                 case Axis.Z:
                     return z;
+            }
+
+            throw new ArgumentException(nameof(axis));
+        }
+
+        public void SetAxis(Axis axis, float value)
+        {
+            switch (axis)
+            {
+                case Axis.X:
+                    x = value;
+                    return;
+                case Axis.Y:
+                    y = value;
+                    return;
+                case Axis.Z:
+                    z = value;
+                    return;
             }
 
             throw new ArgumentException(nameof(axis));

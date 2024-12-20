@@ -4,10 +4,10 @@ namespace RayTracing
 {
     internal class Scene
     {
-        public readonly CameraRenderObject[] Objects;
+        public readonly ICameraRenderObject[] Objects;
         public readonly Camera Camera;
 
-        public Scene(CameraRenderObject[] objects, Camera camera)
+        public Scene(ICameraRenderObject[] objects, Camera camera)
         {
             if (objects == null)
                 throw new ArgumentNullException(nameof(camera));

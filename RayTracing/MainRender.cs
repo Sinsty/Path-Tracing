@@ -1,5 +1,4 @@
 ﻿using System;
-using RayTracing.Tree;
 using System.Threading;
 using System.Diagnostics;
 using System.Drawing;
@@ -18,6 +17,7 @@ namespace RayTracing
         public static int ImageHeight => _currentScene.Camera.ImageHeight;
         public static Scene Scene => _currentScene;
         public static bool IsRendering { get; private set; }
+        public static KDTree AABBTree { get; private set; }
         public static float RenderingTime { get; private set; }
         public static int RenderedPixels { get; private set; }
         public static float RenderTimeLeft { get; private set; }
@@ -52,7 +52,32 @@ namespace RayTracing
             _renderThread.Start();
         }
 
-        private static void Render()
+        private static void CreateKDTree()
+        {
+            List<IBoundingBoxable> boxable = new List<IBoundingBoxable>();
+
+            foreach (var sceneObject in _currentScene.Objects)
+            {
+                if (sceneObject is ICompositeObject)
+                {
+                    foreach (var fromCompositeObject in ((ICompositeObject)sceneObject).GetObjects())
+                    {
+                        if (fromCompositeObject is IBoundingBoxable)
+                            boxable.Add((IBoundingBoxable)fromCompositeObject);
+                    }
+                }
+                else if (sceneObject is IBoundingBoxable)
+                {
+                    boxable.Add((IBoundingBoxable)sceneObject);
+                }
+            }
+
+            AABBTree = new KDTree();
+            AABBTree.CreateTree(boxable.ToArray());
+            Debug.WriteLine("Tree created");
+        }
+
+        private static async void Render()
         {
             IsRendering = true;
 
@@ -66,33 +91,13 @@ namespace RayTracing
             byte[] rgbValues = new byte[bytes];
             Marshal.Copy(pointer, rgbValues, 0, bytes);
 
+            CreateKDTree();
+
             float renderTime = 0f;
 
             Stopwatch rowRenderWatch = new Stopwatch();
             Stopwatch allRenderingWatch = new Stopwatch();
             allRenderingWatch.Start();
-
-            List<Triangle> triangles = new List<Triangle>();
-
-            foreach (var sceneObject in _currentScene.Objects)
-            {
-                if (sceneObject is Triangle)
-                {
-                    triangles.Add((Triangle)sceneObject);
-                }
-
-                if (sceneObject is Mesh)
-                {
-                    Mesh mesh = (Mesh)sceneObject;
-                    foreach (Triangle tri in mesh.Triangles)
-                    {
-                        triangles.Add(tri);
-                    }
-                }
-            }
-
-            KDTree tree = new KDTree();
-            tree.CreateTree(triangles.ToArray());
 
             for (int y = 0; y < image.Height; y++)
             {
