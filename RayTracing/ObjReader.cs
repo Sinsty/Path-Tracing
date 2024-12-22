@@ -10,19 +10,15 @@ namespace RayTracing
         //<summary>
         //1 - vertices
         //2 - faces (Vertices indexes)
-        //3 - normals
-        //4 - faces normals indexes
         //</summary>
-        static public (Vector3f[], int[], Vector3f[], int[]) Parse(string path)
+        static public (Vector3f[], int[]) Parse(string path)
         {
             string[] objLines = File.ReadAllLines(path);
 
             string file = File.ReadAllText(path);
 
             List<Vector3f> vertices = new List<Vector3f>();
-            List<Vector3f> normals = new List<Vector3f>();
             List<int> faces = new List<int>();
-            List<int> normalsIndexes = new List<int>();
 
             foreach (string line in objLines)
             {
@@ -31,22 +27,16 @@ namespace RayTracing
                     vertices.Add(ParseVertices(line));
                 }
 
-                if (line.StartsWith("vn "))
-                {
-                    normals.Add(ParseNormals(line));
-                }
-
                 if (line.StartsWith("f "))
                 {
-                    (int[] face, int normalIndex) = ParseFaces(line);
+                    int[] face = ParseFaces(line);
                     faces.Add(face[0]);
                     faces.Add(face[1]);
                     faces.Add(face[2]);
-                    normalsIndexes.Add(normalIndex);
                 }
             }
 
-            return (vertices.ToArray(), faces.ToArray(), normals.ToArray(), normalsIndexes.ToArray());
+            return (vertices.ToArray(), faces.ToArray());
         }
 
         private static Vector3f ParseVertices(string line)
@@ -87,7 +77,7 @@ namespace RayTracing
         //1 - faces
         //2 - normals
         //</summary>
-        private static (int[], int) ParseFaces(string line)
+        private static int[] ParseFaces(string line)
         {
             if (line.StartsWith("f ") == false)
             {
@@ -101,7 +91,7 @@ namespace RayTracing
             int y = int.Parse(vertices[1].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
             int z = int.Parse(vertices[2].Split("/")[0], CultureInfo.InvariantCulture.NumberFormat);
 
-            return ([x, y, z], int.Parse(vertices[0].Split("/")[2], CultureInfo.InvariantCulture.NumberFormat));
+            return [x, y, z];
         }
     }
 }

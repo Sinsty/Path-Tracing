@@ -5,10 +5,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using RayTracing.CameraRendering;
 using RayTracing.Geometry;
-using RayTracing.ThreeDimensionalTree;
 
 
 namespace RayTracing
@@ -21,7 +19,6 @@ namespace RayTracing
         public static int ImageHeight => _currentScene.Camera.ImageHeight;
         public static Scene Scene => _currentScene;
         public static bool IsRendering { get; private set; }
-        public static KDTree AABBTree { get; private set; }
         public static float RenderingTime { get; private set; }
         public static int RenderedPixels { get; private set; }
         public static float RenderTimeLeft { get; private set; }
@@ -55,32 +52,6 @@ namespace RayTracing
             _renderThread.Priority = ThreadPriority.AboveNormal;
             _renderThread.Start();
         }
-
-        private static void CreateKDTree()
-        {
-            List<IBoundingBoxable> boxable = new List<IBoundingBoxable>();
-
-            foreach (var sceneObject in _currentScene.Objects)
-            {
-                if (sceneObject is ICompositeObject)
-                {
-                    foreach (var fromCompositeObject in ((ICompositeObject)sceneObject).GetObjects())
-                    {
-                        if (fromCompositeObject is IBoundingBoxable)
-                            boxable.Add((IBoundingBoxable)fromCompositeObject);
-                    }
-                }
-                else if (sceneObject is IBoundingBoxable)
-                {
-                    boxable.Add((IBoundingBoxable)sceneObject);
-                }
-            }
-
-            AABBTree = new KDTree();
-            AABBTree.CreateTree(boxable.ToArray());
-            Debug.WriteLine("Tree created");
-        }
-
         private static async void Render()
         {
             IsRendering = true;
@@ -94,8 +65,6 @@ namespace RayTracing
             int bytes = Math.Abs(imageData.Stride) * image.Height;
             byte[] rgbValues = new byte[bytes];
             Marshal.Copy(pointer, rgbValues, 0, bytes);
-
-            CreateKDTree();
 
             float renderTime = 0f;
 
@@ -123,7 +92,7 @@ namespace RayTracing
 
             RenderTimeLeft = 0;
             allRenderingWatch.Stop();
-            RenderedPixels = image.Width, * image.Height
+            RenderedPixels = image.Width * image.Height;
 
             IsRendering = false;
 

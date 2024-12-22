@@ -1,5 +1,4 @@
 ﻿using RayTracing.CameraRendering;
-using RayTracing.ThreeDimensionalTree;
 using System;
 
 namespace RayTracing.ThreeDimensionalTree
@@ -26,16 +25,15 @@ namespace RayTracing.ThreeDimensionalTree
 
         private const float _cI = 1;
         private const float _cT = 1;
-        private const int _minTriangles = 6;
 
         public KDTreeNode(KDTreeNode parent)
         {
             Parent = parent;
         }
 
-        public bool SplitBox(int planesCount, Vector3f.Axis axis, int minTrianglesInBox)
+        public bool SplitBox(int planesCount, Vector3f.Axis axis, int minObjectsInBox)
         {
-            if (Box.Boxables.Count <= minTrianglesInBox && IsLeaf == true)
+            if (Box.Boxables.Count <= minObjectsInBox && IsLeaf == true)
                 return false;
 
             int[] high = new int[planesCount + 1]; // left high[i]

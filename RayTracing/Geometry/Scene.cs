@@ -1,5 +1,6 @@
 ﻿using System;
 using RayTracing.CameraRendering;
+using RayTracing.ThreeDimensionalTree;
 
 namespace RayTracing.Geometry
 {
@@ -7,6 +8,8 @@ namespace RayTracing.Geometry
     {
         public readonly ICameraRenderObject[] Objects;
         public readonly Camera Camera;
+
+        public KDTree Tree { get; private set; }
 
         public Scene(ICameraRenderObject[] objects, Camera camera)
         {
@@ -17,6 +20,11 @@ namespace RayTracing.Geometry
 
             Objects = objects;
             Camera = camera;
+        }
+
+        public void GenerateKDTree(int maxDepth, int sahNumberOfDivisions, int minObjectsInBox)
+        {
+            Tree = KDTree.CreateKDTree(this, maxDepth, sahNumberOfDivisions, minObjectsInBox);
         }
     }
 }

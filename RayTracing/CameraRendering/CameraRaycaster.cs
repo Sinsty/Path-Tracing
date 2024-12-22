@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace RayTracing.CameraRendering
 {
@@ -7,16 +6,18 @@ namespace RayTracing.CameraRendering
     {
         private static Random _random = new Random();
 
-
         //pdf = cos(theta) / pi
-        //
         public static CameraRaycastInfo CastRay(Ray ray, int maxBounces)
         {
             HitInfo hit;
-            ICameraRenderObject intersectObject = MainRender.AABBTree.FindRayIntersection(ray, out hit);
+            ICameraRenderObject intersectObject = MainRender.Scene.Tree != null ?
+                                                  MainRender.Scene.Tree.FindRayIntersection(ray, out hit) :
+                                                  GetObjectFromRay(ray, out hit);
 
             if (intersectObject != null)
             {
+                //return new CameraRaycastInfo(Vector3f.One * 100000000, 0, true);
+
                 Material material = intersectObject.AppliedMaterial;
 
                 Vector3f selfLight = material.Color.Rgb * material.LightIntencity;
@@ -40,7 +41,13 @@ namespace RayTracing.CameraRendering
                 float lDotN = MathF.Max(Vector3f.Dot(reflectedRay.direction, hit.Normal), 0);
 
                 Vector3f reflectedColor = Vector3f.MultiplyByElements(brdf.Rgb, incomingLight) * lDotN;
-                Vector3f distanceReflectedColor = Vector3f.ClampValuesFromVector(reflectedColor / MathF.Pow(reflectedRayInfo.Distance, 2), Vector3f.Zero, reflectedColor);
+
+                Vector3f distanceReflectedColor = reflectedColor;
+
+                if (reflectedRayInfo.Distance > 1)
+                {
+                    distanceReflectedColor /= MathF.Pow(reflectedRayInfo.Distance, 2);
+                }
 
                 Vector3f color = selfLight + distanceReflectedColor;
 
@@ -50,6 +57,26 @@ namespace RayTracing.CameraRendering
             {
                 return new CameraRaycastInfo(Vector3f.Zero, 0, false);
             }
+        }
+
+        private static ICameraRenderObject GetObjectFromRay(Ray ray, out HitInfo hit)
+        {
+            ICameraRenderObject closestObject = null;
+            hit = new HitInfo(float.MaxValue);
+
+            foreach (ICameraRenderObject boxable in MainRender.Scene.Objects)
+            {
+                if (boxable.RayIntersect(ray, out HitInfo objectHit))
+                {
+                    if (objectHit.Distance < hit.Distance)
+                    {
+                        closestObject = boxable;
+                        hit = objectHit;
+                    }
+                }
+            }
+
+            return closestObject;
         }
 
         private static Ray HandleReflectedRay(HitInfo rayObjectHit)

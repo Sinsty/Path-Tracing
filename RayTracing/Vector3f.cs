@@ -298,11 +298,11 @@ namespace RayTracing
 
         public static Vector3f ClampValuesFromVector(Vector3f vector, Vector3f minVector, Vector3f maxVector)
         {
-            vector.x = MathF.Max(MathF.Min(vector.x, maxVector.x), minVector.x);
-            vector.y = MathF.Max(MathF.Min(vector.y, maxVector.y), minVector.y);
-            vector.z = MathF.Max(MathF.Min(vector.z, maxVector.z), minVector.z);
+            float x = MathF.Max(MathF.Min(vector.x, maxVector.x), minVector.x);
+            float y = MathF.Max(MathF.Min(vector.y, maxVector.y), minVector.y);
+            float z = MathF.Max(MathF.Min(vector.z, maxVector.z), minVector.z);
 
-            return vector;
+            return new Vector3f(x, y, z);
         }
     }
 }

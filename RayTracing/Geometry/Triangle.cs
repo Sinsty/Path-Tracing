@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using RayTracing.CameraRendering;
 using RayTracing.ThreeDimensionalTree;
 
@@ -55,7 +56,7 @@ namespace RayTracing.Geometry
 
             float det = Vector3f.Dot(edge1, directionCrossEdge2);
 
-            if (MathF.Abs(det) < 0.0001f)
+            if (MathF.Abs(det) < float.Epsilon)
             {
                 hit = new HitInfo();
                 return false;
@@ -82,7 +83,7 @@ namespace RayTracing.Geometry
 
             float t = invDet * Vector3f.Dot(edge2, sCrossEdge1);
 
-            if (t > 0f)
+            if (t > float.Epsilon)
             {
                 hit = new HitInfo(t, ray.origin + ray.direction * t, Vector3f.Cross(edge1, edge2));
                 return true;

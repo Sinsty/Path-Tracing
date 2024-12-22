@@ -1,4 +1,5 @@
 ﻿using RayTracing.CameraRendering;
+using System.Diagnostics;
 
 namespace RayTracing.Geometry
 {
@@ -13,7 +14,7 @@ namespace RayTracing.Geometry
             Position = position;
             AppliedMaterial = material;
 
-            (Vector3f[] vertices, int[] faces, Vector3f[] normals, int[] normalsIndexes) = ObjReader.Parse(pathToObjModel);
+            (Vector3f[] vertices, int[] faces) = ObjReader.Parse(pathToObjModel);
 
             int trianglesCount = faces.Length / 3;
             Triangles = new Triangle[trianglesCount];

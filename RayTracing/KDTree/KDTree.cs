@@ -1,17 +1,45 @@
 ﻿using RayTracing.CameraRendering;
+using RayTracing.Geometry;
+using System.Collections.Generic;
 
 namespace RayTracing.ThreeDimensionalTree
 {
     internal class KDTree
     {
         private KDTreeNode _root;
-        private int _maxDepth = 32;
-        private int _numberOfDivisions = 32;
-        private int _minTriangles = 6;
+        private readonly int _maxDepth;
+        private readonly int _numberOfDivisions;
+        private readonly int _minObjectsInBox;
 
-        public void CreateTree(IBoundingBoxable[] boxable)
+        public static KDTree CreateKDTree(Scene scene, int maxDepth, int sahNumberOfDivisions, int minObjectsInBox)
+        {
+            List<IBoundingBoxable> boxable = new List<IBoundingBoxable>();
+
+            foreach (var sceneObject in scene.Objects)
+            {
+                if (sceneObject is ICompositeObject)
+                {
+                    foreach (var fromCompositeObject in ((ICompositeObject)sceneObject).GetObjects())
+                    {
+                        if (fromCompositeObject is IBoundingBoxable)
+                            boxable.Add((IBoundingBoxable)fromCompositeObject);
+                    }
+                }
+                else if (sceneObject is IBoundingBoxable)
+                {
+                    boxable.Add((IBoundingBoxable)sceneObject);
+                }
+            }
+
+            return new KDTree(boxable.ToArray(), maxDepth, sahNumberOfDivisions, minObjectsInBox);
+        }
+
+        public KDTree(IBoundingBoxable[] boxable, int maxDepth, int sahNumberOfDivisions, int minObjectsInBox)
         {
             _root = new KDTreeNode(null);
+            _maxDepth = maxDepth;
+            _numberOfDivisions = sahNumberOfDivisions;
+            _minObjectsInBox = minObjectsInBox;
 
             _root.Box = BoundingBox.CreateAroundObjects(boxable);
             RecursionNodesCreate(_root, Vector3f.Axis.X, 0);
