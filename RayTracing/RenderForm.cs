@@ -9,7 +9,7 @@ namespace RayTracing
 {
     public partial class RenderForm : Form
     {
-        private Thread _renderStatesThread;
+        private Thread _renderStatsThread;
 
         public RenderForm()
         {
@@ -24,33 +24,39 @@ namespace RayTracing
 
         private Scene CreateAndGetScene()
         {
-            Material lightMaterial = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, 1000f);
-            Material sphereMaterial2 = new Material(new VectorColor(1f, 1f, 1f), 0.5f, 0.75f, 0f);
-            Material meshMaterial = new Material(new VectorColor(0.2f, 0.2f, 1f), 1f, 0f, 0f);
+            Material lightMaterial = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, 2.5f);
+            Material sphereMaterial2 = new Material(new VectorColor(1f, 1f, 1f), 0.5f, 0.5f, 0f, new VectorColor(0.0337f, 0.0337f, 0.0337f));
+            Material meshMaterial = new Material(new VectorColor(1f, 1f, 1f), 0.5f, 0.5f, 0f);
+            Material teapotMaterial = new Material(new VectorColor(0f, 1f, 1f), 0.5f, 0.5f, 0f);
 
             Material cornellLeft = new Material(new VectorColor(1f, 0f, 0f), 1f, 0f, 0f);
             Material cornellRight = new Material(new VectorColor(0f, 1f, 0f), 1f, 0f, 0f);
-            Material cornellMain = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, 0f);
+            Material cornellMain = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, 0f, new VectorColor(0.0337f, 0.0337f, 0.0337f));
 
             ICameraRenderObject[] sceneObjects =
             [
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 5, 0), new Vector3f(0, 5, 5)], cornellLeft),
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 5, 5), new Vector3f(0, 0, 5)], cornellLeft),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 5, 0), new Vector3f(0, 5, 5)], cornellLeft),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 5, 5), new Vector3f(0, 0, 5)], cornellLeft),
 
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(5, 5, 0), new Vector3f(5, 0, 0)], cornellRight),
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 0, 5), new Vector3f(5, 5, 5), new Vector3f(5, 0, 0)], cornellRight),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(5, 5, 0), new Vector3f(5, 0, 0)], cornellRight),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 0, 5), new Vector3f(5, 5, 5), new Vector3f(5, 0, 0)], cornellRight),
 
                 new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 0, 5), new Vector3f(5, 0, 5)], cornellMain),
                 new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(5, 0, 5), new Vector3f(5, 0, 0)], cornellMain),
 
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(0, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 0), new Vector3f(5, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(0, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 0), new Vector3f(5, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
 
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(0, 5, 5), new Vector3f(5, 5, 5)], cornellMain),
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(5, 5, 5), new Vector3f(5, 0, 5)], cornellMain),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(3f, 4.99f, 3f), new Vector3f(2f, 4.99f, 3f), new Vector3f(2f, 4.99f, 2f)], lightMaterial),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(3f, 4.99f, 2f), new Vector3f(3f, 4.99f, 3f), new Vector3f(2f, 4.99f, 2f)], lightMaterial),
 
-                new Sphere(new Vector3f(0, 5.25f, 0), 3, lightMaterial),
-                new Mesh(new Vector3f(0, -2.5f, 0), @"D:\YLink\RayTracing\RayTracing\src\Dragon871414.obj", meshMaterial)
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(0, 5, 5), new Vector3f(5, 5, 5)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(5, 5, 5), new Vector3f(5, 0, 5)], cornellMain),
+
+                //new Sphere(new Vector3f(0, 3.25f, 0), 1f, lightMaterial),
+
+                //new Sphere(new Vector3f(0, 0, 0), 1f, sphereMaterial2),
+                //new Mesh(new Vector3f(0, -2.5f, 1f), @"D:\YLink\RayTracing\RayTracing\src\Teapot.obj", teapotMaterial)
             ];
 
             Camera camera = new Camera(new Vector3f(0f, 0f, -5f), 60, 1000, (int)imageWidthNumericUpDown.Value, (int)imageHeightNumericUpDown.Value, (int)rayBouncesNumericUpDown.Value);
@@ -87,12 +93,26 @@ namespace RayTracing
         {
             MainRender.StartRender(1920, 1080, (int)samplesCountNumericUpDown.Value, CreateAndGetScene());
 
-            if (_renderStatesThread == null)
+            if (_renderStatsThread == null)
             {
-                _renderStatesThread = new Thread(UpdateRenderStats);
-                _renderStatesThread.IsBackground = true;
-                _renderStatesThread.Priority = ThreadPriority.Lowest;
-                _renderStatesThread.Start();
+                _renderStatsThread = new Thread(UpdateRenderStats);
+                _renderStatsThread.IsBackground = true;
+                _renderStatsThread.Priority = ThreadPriority.Lowest;
+                _renderStatsThread.Start();
+            }
+        }
+
+        private void saveImageButton_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "JPG Image|*.jpg";
+                saveFileDialog.RestoreDirectory = true;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image.Save(saveFileDialog.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                }
             }
         }
     }

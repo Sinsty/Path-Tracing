@@ -68,6 +68,10 @@ namespace RayTracing
 
             float renderTime = 0f;
 
+            RenderedPixels = 0;
+            RenderTimeElapsed = 0;
+            RenderTimeLeft = 0;
+
             Stopwatch rowRenderWatch = new Stopwatch();
             Stopwatch allRenderingWatch = new Stopwatch();
             allRenderingWatch.Start();
@@ -113,24 +117,18 @@ namespace RayTracing
         private static Color RenderPixel(int x, int y)
         {
             CameraRaycastInfo firstRaycastInfo = _currentScene.Camera.TraceRay(x, y);
+            if (firstRaycastInfo.IsHit == false)
+                return Color.Black;
 
             Vector3f currentColor = _currentScene.Camera.TraceRay(x, y).Color;
 
-            if (firstRaycastInfo.IsHit == false) return Color.Black;
-
-            int i = 1;
-            while (i < _samplesCount)
+            for (int i = 1; i < _samplesCount; i++)
             {
                 Vector3f rayColor = _currentScene.Camera.TraceRay(x, y).Color;
-
-                float R = (rayColor.x + currentColor.x * (i)) / (i + 1);
-                float G = (rayColor.y + currentColor.y * (i)) / (i + 1);
-                float B = (rayColor.z + currentColor.z * (i)) / (i + 1);
-
-                currentColor = new Vector3f(R, G, B);
-
-                i++;
+                currentColor += rayColor;
             }
+
+            currentColor /= _samplesCount;
 
             return VectorColor.GammaCorrection(VectorColor.AcesFilmicTonemapping(currentColor)).ToBaseColor();
         }

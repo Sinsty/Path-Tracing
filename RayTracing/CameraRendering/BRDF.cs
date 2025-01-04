@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace RayTracing.CameraRendering
 {
@@ -6,7 +7,7 @@ namespace RayTracing.CameraRendering
     {
         public static VectorColor Brdf(Vector3f normal, Vector3f viewVector, Vector3f lightVector, Material material)
         {
-            VectorColor F0 = material.Color * material.Metalness + new VectorColor(0.04f, 0.04f, 0.04f);
+            VectorColor F0 = material.F0;
 
             Vector3f fresnel = FresnelFunction(normal, lightVector, viewVector, F0);
             Vector3f diffuseK = (Vector3f.One - fresnel) * (1 - material.Metalness);
@@ -32,7 +33,6 @@ namespace RayTracing.CameraRendering
             float nDotV = MathF.Max(Vector3f.Dot(normal, viewVector), 0);
             float nDotL = MathF.Max(Vector3f.Dot(normal, lightVector), 0);
             float nDotH = MathF.Max(Vector3f.Dot(normal, halfWayVector), 0);
-
             float alpha = roughness * roughness;
             float D = NormalDistribution(normal, nDotH, alpha);
             float G = SmithGeometryShadowing(normal, nDotV, nDotL, alpha);

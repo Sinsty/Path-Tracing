@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Numerics;
 
 namespace RayTracing.CameraRendering
 {
@@ -6,7 +8,6 @@ namespace RayTracing.CameraRendering
     {
         private static Random _random = new Random();
 
-        //pdf = cos(theta) / pi
         public static CameraRaycastInfo CastRay(Ray ray, int maxBounces)
         {
             HitInfo hit;
@@ -16,8 +17,6 @@ namespace RayTracing.CameraRendering
 
             if (intersectObject != null)
             {
-                //return new CameraRaycastInfo(Vector3f.One * 100000000, 0, true);
-
                 Material material = intersectObject.AppliedMaterial;
 
                 Vector3f selfLight = material.Color.Rgb * material.LightIntencity;
@@ -27,7 +26,7 @@ namespace RayTracing.CameraRendering
                     return new CameraRaycastInfo(selfLight, 0, false);
                 }
 
-                Ray reflectedRay = HandleReflectedRay(hit);
+                Ray reflectedRay = HandleReflectedRay(hit, out float pdf);
                 CameraRaycastInfo reflectedRayInfo = CastRay(reflectedRay, maxBounces - 1);
 
                 if (reflectedRayInfo.IsHit == false)
@@ -37,19 +36,13 @@ namespace RayTracing.CameraRendering
 
                 Vector3f incomingLight = reflectedRayInfo.Color;
 
-                VectorColor brdf = BRDF.Brdf(hit.Normal, ray.direction, reflectedRay.direction, material);
-                float lDotN = MathF.Max(Vector3f.Dot(reflectedRay.direction, hit.Normal), 0);
+                VectorColor brdf = BRDF.Brdf(hit.Normal, -ray.direction, reflectedRay.direction, material);
+                float lDotN = MathF.Max(Vector3f.Dot(reflectedRay.direction, hit.Normal), 0.000001f);
 
                 Vector3f reflectedColor = Vector3f.MultiplyByElements(brdf.Rgb, incomingLight) * lDotN;
+                reflectedColor /= pdf;
 
-                Vector3f distanceReflectedColor = reflectedColor;
-
-                if (reflectedRayInfo.Distance > 1)
-                {
-                    distanceReflectedColor /= MathF.Pow(reflectedRayInfo.Distance, 2);
-                }
-
-                Vector3f color = selfLight + distanceReflectedColor;
+                Vector3f color = selfLight + reflectedColor;
 
                 return new CameraRaycastInfo(color, hit.Distance, true);
             }
@@ -79,30 +72,38 @@ namespace RayTracing.CameraRendering
             return closestObject;
         }
 
-        private static Ray HandleReflectedRay(HitInfo rayObjectHit)
+        private static Ray HandleReflectedRay(HitInfo rayObjectHit, out float pdf)
         {
-            Vector3f reflectedRayDirection = getRandomPointInSphere(rayObjectHit.Point + rayObjectHit.Normal) - rayObjectHit.Point;
+            Vector3f reflectedRayDirection = CosineWeightedHemisphere(rayObjectHit.Normal, out pdf);
 
-            Ray reflectedRay = new Ray(rayObjectHit.Point, reflectedRayDirection);
+            Ray reflectedRay = new Ray(rayObjectHit.Point, reflectedRayDirection.GetNormalized());
 
             return reflectedRay;
         }
 
-        private static Vector3f getRandomPointInSphere(Vector3f spherePosition)
+        private static Vector3f CosineWeightedHemisphere(Vector3f normal, out float pdf)
         {
-            Vector3f point = Vector3f.Zero;
+            float e0 = (float)_random.NextDouble();
+            float e1 = (float)_random.NextDouble();
 
-            float d = 2;
-            while (d >= 1)
-            {
-                point.x = (float)_random.NextDouble() * 2 - 1;
-                point.y = (float)_random.NextDouble() * 2 - 1;
-                point.z = (float)_random.NextDouble() * 2 - 1;
+            e0 = MathF.Max(e0, 0.000001f);
+            float cosTheta = MathF.Sqrt(e0);
+            float sinTheta = MathF.Sqrt(MathF.Max(1 - cosTheta * cosTheta, 0.000001f));
+            float phi = 2 * MathF.PI * e1;
 
-                d = point.GetLength();
-            }
+            float x = MathF.Cos(phi) * sinTheta;
+            float y = MathF.Sin(phi) * sinTheta;
+            float z = cosTheta;
 
-            return point + spherePosition;
+            Vector3f t = 1 > MathF.Abs(x) ? new Vector3f(0, 0, 1) : new Vector3f(1, 0, 0);
+            Vector3f tangent = Vector3f.Cross(t, normal).GetNormalized();
+            Vector3f bitangent = Vector3f.Cross(normal, tangent);
+
+            Vector3f direction = x * tangent + y * bitangent + z * normal;
+
+            pdf = cosTheta / MathF.PI;
+
+            return direction;
         }
     }
 

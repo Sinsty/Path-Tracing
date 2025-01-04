@@ -60,6 +60,11 @@ namespace RayTracing
             return b;
         }
 
+        public static Vector3f Abs(Vector3f a)
+        {
+            return new Vector3f(MathF.Abs(a.x), MathF.Abs(a.y), MathF.Abs(a.z));
+        }
+
         public static Vector3f Cross(Vector3f a, Vector3f b)
         {
             float cx = a.y * b.z - a.z * b.y;
@@ -222,11 +227,6 @@ namespace RayTracing
             }
 
             throw new ArgumentException(nameof(axis));
-        }
-
-        public static Vector3f Abs(Vector3f a)
-        {
-            return new Vector3f(MathF.Abs(a.x), MathF.Abs(a.y), MathF.Abs(a.z));
         }
 
         public void Rotate(Vector3f angle)

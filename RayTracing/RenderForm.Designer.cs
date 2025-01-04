@@ -30,6 +30,8 @@
         {
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             pictureBox1 = new System.Windows.Forms.PictureBox();
+            saveImageButton = new System.Windows.Forms.Button();
+            useKDTreeCheckBox = new System.Windows.Forms.CheckBox();
             sahPlanesDivisionsLabel = new System.Windows.Forms.Label();
             MinObjectsInBoundingBox = new System.Windows.Forms.Label();
             maxDepthLabel = new System.Windows.Forms.Label();
@@ -49,7 +51,6 @@
             rayBouncesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             samplesCountNumericUpDown = new System.Windows.Forms.NumericUpDown();
             StartRenderButton = new System.Windows.Forms.Button();
-            useKDTreeCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -79,6 +80,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(saveImageButton);
             splitContainer1.Panel2.Controls.Add(useKDTreeCheckBox);
             splitContainer1.Panel2.Controls.Add(sahPlanesDivisionsLabel);
             splitContainer1.Panel2.Controls.Add(MinObjectsInBoundingBox);
@@ -112,6 +114,28 @@
             pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            // 
+            // saveImageButton
+            // 
+            saveImageButton.Location = new System.Drawing.Point(104, 454);
+            saveImageButton.Name = "saveImageButton";
+            saveImageButton.Size = new System.Drawing.Size(75, 23);
+            saveImageButton.TabIndex = 17;
+            saveImageButton.Text = "Save Image";
+            saveImageButton.UseVisualStyleBackColor = true;
+            saveImageButton.Click += saveImageButton_Click;
+            // 
+            // useKDTreeCheckBox
+            // 
+            useKDTreeCheckBox.AutoSize = true;
+            useKDTreeCheckBox.Checked = true;
+            useKDTreeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            useKDTreeCheckBox.Location = new System.Drawing.Point(3, 238);
+            useKDTreeCheckBox.Name = "useKDTreeCheckBox";
+            useKDTreeCheckBox.Size = new System.Drawing.Size(89, 19);
+            useKDTreeCheckBox.TabIndex = 16;
+            useKDTreeCheckBox.Text = "Use KD-Tree";
+            useKDTreeCheckBox.UseVisualStyleBackColor = true;
             // 
             // sahPlanesDivisionsLabel
             // 
@@ -294,18 +318,6 @@
             StartRenderButton.UseVisualStyleBackColor = true;
             StartRenderButton.Click += StartRenderButtonClick;
             // 
-            // useKDTreeCheckBox
-            // 
-            useKDTreeCheckBox.AutoSize = true;
-            useKDTreeCheckBox.Checked = true;
-            useKDTreeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            useKDTreeCheckBox.Location = new System.Drawing.Point(3, 238);
-            useKDTreeCheckBox.Name = "useKDTreeCheckBox";
-            useKDTreeCheckBox.Size = new System.Drawing.Size(89, 19);
-            useKDTreeCheckBox.TabIndex = 16;
-            useKDTreeCheckBox.Text = "Use KD-Tree";
-            useKDTreeCheckBox.UseVisualStyleBackColor = true;
-            // 
             // RenderForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -355,6 +367,7 @@
         private System.Windows.Forms.Label sahPlanesDivisionsLabel;
         private System.Windows.Forms.Label MinObjectsInBoundingBox;
         private System.Windows.Forms.CheckBox useKDTreeCheckBox;
+        private System.Windows.Forms.Button saveImageButton;
     }
 }
 

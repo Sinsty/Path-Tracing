@@ -70,6 +70,7 @@ namespace RayTracing.CameraRendering
 
         public Color ToBaseColor()
         {
+
             return Color.FromArgb((int)MathF.Round(Rgb.x * 255), (int)MathF.Round(Rgb.y * 255), (int)MathF.Round(Rgb.z * 255));
         }
 
