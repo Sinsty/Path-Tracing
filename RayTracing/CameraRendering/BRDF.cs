@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 
-namespace RayTracing.CameraRendering
+namespace PathTracing.CameraRendering
 {
     internal static class BRDF
     {

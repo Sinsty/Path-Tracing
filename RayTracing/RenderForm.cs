@@ -2,10 +2,10 @@
 using System.Threading;
 using System.Drawing;
 using System.Windows.Forms;
-using RayTracing.CameraRendering;
-using RayTracing.Geometry;
+using PathTracing.CameraRendering;
+using PathTracing.Geometry;
 
-namespace RayTracing
+namespace PathTracing
 {
     public partial class RenderForm : Form
     {
@@ -24,8 +24,8 @@ namespace RayTracing
 
         private Scene CreateAndGetScene()
         {
-            Material lightMaterial = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, 2.5f);
-            Material sphereMaterial2 = new Material(new VectorColor(1f, 1f, 1f), 0.5f, 0.5f, 0f, new VectorColor(0.0337f, 0.0337f, 0.0337f));
+            Material lightMaterial = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, 25f);
+            Material sphereMaterial2 = new Material(new VectorColor(0.7f, 0.5f, 1f), 0.5f, 0.8f, 0f, new VectorColor(0.0337f, 0.0337f, 0.0337f));
             Material meshMaterial = new Material(new VectorColor(1f, 1f, 1f), 0.5f, 0.5f, 0f);
             Material teapotMaterial = new Material(new VectorColor(0f, 1f, 1f), 0.5f, 0.5f, 0f);
 
@@ -41,8 +41,8 @@ namespace RayTracing
                 //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(5, 5, 0), new Vector3f(5, 0, 0)], cornellRight),
                 //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 0, 5), new Vector3f(5, 5, 5), new Vector3f(5, 0, 0)], cornellRight),
 
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 0, 5), new Vector3f(5, 0, 5)], cornellMain),
-                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(5, 0, 5), new Vector3f(5, 0, 0)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 0, 5), new Vector3f(5, 0, 5)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(5, 0, 5), new Vector3f(5, 0, 0)], cornellMain),
 
                 //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(0, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
                 //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 0), new Vector3f(5, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
@@ -50,16 +50,20 @@ namespace RayTracing
                 new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(3f, 4.99f, 3f), new Vector3f(2f, 4.99f, 3f), new Vector3f(2f, 4.99f, 2f)], lightMaterial),
                 new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(3f, 4.99f, 2f), new Vector3f(3f, 4.99f, 3f), new Vector3f(2f, 4.99f, 2f)], lightMaterial),
 
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(0, 5, 5), new Vector3f(5, 5, 5)], cornellMain),
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(5, 5, 5), new Vector3f(5, 0, 5)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(0, 5, 5f), new Vector3f(5, 5, 5f)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(5, 5, 5f), new Vector3f(5, 0, 5)], cornellMain),
 
                 //new Sphere(new Vector3f(0, 3.25f, 0), 1f, lightMaterial),
 
                 //new Sphere(new Vector3f(0, 0, 0), 1f, sphereMaterial2),
-                //new Mesh(new Vector3f(0, -2.5f, 1f), @"D:\YLink\RayTracing\RayTracing\src\Teapot.obj", teapotMaterial)
+                new Mesh(new Vector3f(0, 0, 2f), @"D:\YLink\RayTracing\RayTracing\src\Skull.obj", teapotMaterial)
             ];
 
-            Camera camera = new Camera(new Vector3f(0f, 0f, -5f), 60, 1000, (int)imageWidthNumericUpDown.Value, (int)imageHeightNumericUpDown.Value, (int)rayBouncesNumericUpDown.Value);
+            Camera camera = new Camera(new Vector3f(0f, 0f, -5f), 60, 1000, 
+                                       (int)imageWidthNumericUpDown.Value, 
+                                       (int)imageHeightNumericUpDown.Value, 
+                                       (int)rayBouncesNumericUpDown.Value, 
+                                       (int)samplesCountNumericUpDown.Value);
 
             Scene scene = new Scene(sceneObjects, camera);
             if (useKDTreeCheckBox.Checked)
@@ -91,7 +95,7 @@ namespace RayTracing
 
         private void StartRenderButtonClick(object sender, EventArgs e)
         {
-            MainRender.StartRender(1920, 1080, (int)samplesCountNumericUpDown.Value, CreateAndGetScene());
+            MainRender.StartRender(1920, 1080, CreateAndGetScene());
 
             if (_renderStatsThread == null)
             {

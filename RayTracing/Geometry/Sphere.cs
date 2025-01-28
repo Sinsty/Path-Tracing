@@ -1,8 +1,8 @@
 ﻿using System;
-using RayTracing.CameraRendering;
-using RayTracing.ThreeDimensionalTree;
+using PathTracing.CameraRendering;
+using PathTracing.ThreeDimensionalTree;
 
-namespace RayTracing.Geometry
+namespace PathTracing.Geometry
 {
     internal class Sphere : IBoundingBoxable
     {

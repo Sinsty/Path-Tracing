@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RayTracing.Properties
+namespace PathTracing.Properties
 {
 
 

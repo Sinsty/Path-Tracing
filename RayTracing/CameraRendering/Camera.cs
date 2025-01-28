@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Drawing;
 
-namespace RayTracing.CameraRendering
+namespace PathTracing.CameraRendering
 {
     internal class Camera
     {
@@ -11,10 +12,12 @@ namespace RayTracing.CameraRendering
         public int CurrentImageWidth => _currentImageWidth;
         public int CurrentImageHeight => _currentImageHeight;
         public int CurrentRayBouncesCount => _currentRayBouncesCount;
+        public int CurrentSamplesCount => _samplesCount;
 
         private int _currentImageWidth;
         private int _currentImageHeight;
         private int _currentRayBouncesCount;
+        private int _currentSamplesCount;
 
         #region RaycastParameters
 
@@ -54,11 +57,23 @@ namespace RayTracing.CameraRendering
             }
         }
 
+        private int _samplesCount;
+        public int SamplesCount
+        {
+            get { return _samplesCount; }
+            set
+            {
+                if (value < 0)
+                { throw new ArgumentOutOfRangeException(nameof(value)); }
+                _samplesCount = value;
+            }
+        }
+
         #endregion RaycastParameters
 
         private Random _random = new Random();
 
-        public Camera(Vector3f position, float fov, float maxViewDistance, int imageWidth, int imageHeight, int rayBouncesCount)
+        public Camera(Vector3f position, float fov, float maxViewDistance, int imageWidth, int imageHeight, int rayBouncesCount, int samplesCount)
         {
             Position = position;
             Fov = fov;
@@ -66,14 +81,15 @@ namespace RayTracing.CameraRendering
             ImageWidth = imageWidth;
             ImageHeight = imageHeight;
             RayBouncesCount = rayBouncesCount;
+            SamplesCount = samplesCount;
 
             UpdateValues();
             MainRender.OnEndRendering += (image) => UpdateValues();
         }
 
-        public CameraRaycastInfo TraceRay(int x, int y)
+        public Color CalculatePixelColor(int x, int y)
         {
-            return CameraRaycaster.CastRay(CreateRayFromPixel(x, y), _currentRayBouncesCount);
+            return CameraRaycaster.PathTraceColor(CreateRayFromPixel(x, y), _currentRayBouncesCount, _currentSamplesCount);
         }
 
         private Ray CreateRayFromPixel(int x, int y)
@@ -89,6 +105,7 @@ namespace RayTracing.CameraRendering
             _currentImageWidth = ImageWidth;
             _currentImageHeight = ImageHeight;
             _currentRayBouncesCount = RayBouncesCount;
+            _currentSamplesCount = SamplesCount;
         }
     }
 }

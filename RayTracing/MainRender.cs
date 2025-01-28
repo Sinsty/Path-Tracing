@@ -5,11 +5,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using RayTracing.CameraRendering;
-using RayTracing.Geometry;
+using PathTracing.Geometry;
 
 
-namespace RayTracing
+namespace PathTracing
 {
     internal static class MainRender
     {
@@ -24,12 +23,11 @@ namespace RayTracing
         public static float RenderTimeLeft { get; private set; }
         public static float RenderTimeElapsed { get; private set; }
 
-        private static int _samplesCount;
         private static Thread _renderThread;
 
         private static Scene _currentScene;
 
-        public static void StartRender(int imageWidth, int imageHeight, int samples, Scene scene)
+        public static void StartRender(int imageWidth, int imageHeight, Scene scene)
         {
             if (IsRendering)
                 return;
@@ -38,12 +36,8 @@ namespace RayTracing
                 throw new ArgumentOutOfRangeException(nameof(imageWidth));
             if (imageHeight < 0)
                 throw new ArgumentOutOfRangeException(nameof(imageHeight));
-            if (samples < 0)
-                throw new ArgumentOutOfRangeException(nameof(samples));
             if (scene == null)
                 throw new NullReferenceException(nameof(scene));
-
-            _samplesCount = samples;
 
             _currentScene = scene;
 
@@ -82,7 +76,7 @@ namespace RayTracing
 
                 Parallel.For(0, image.Width, (int x) =>
                 {
-                    SetPixel(x, y, rgbValues, imageData, RenderPixel(x, y));
+                    SetPixel(x, y, rgbValues, imageData, _currentScene.Camera.CalculatePixelColor(x, y));
                     RenderedPixels++;
                 });
 
@@ -112,25 +106,6 @@ namespace RayTracing
             rgbValues[pixel] = color.B;
             rgbValues[pixel + 1] = color.G;
             rgbValues[pixel + 2] = color.R;
-        }
-
-        private static Color RenderPixel(int x, int y)
-        {
-            CameraRaycastInfo firstRaycastInfo = _currentScene.Camera.TraceRay(x, y);
-            if (firstRaycastInfo.IsHit == false)
-                return Color.Black;
-
-            Vector3f currentColor = _currentScene.Camera.TraceRay(x, y).Color;
-
-            for (int i = 1; i < _samplesCount; i++)
-            {
-                Vector3f rayColor = _currentScene.Camera.TraceRay(x, y).Color;
-                currentColor += rayColor;
-            }
-
-            currentColor /= _samplesCount;
-
-            return VectorColor.GammaCorrection(VectorColor.AcesFilmicTonemapping(currentColor)).ToBaseColor();
         }
     }
 }

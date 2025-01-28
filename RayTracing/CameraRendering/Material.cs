@@ -1,4 +1,4 @@
-﻿namespace RayTracing.CameraRendering
+﻿namespace PathTracing.CameraRendering
 {
     internal class Material
     {

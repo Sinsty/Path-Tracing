@@ -1,7 +1,7 @@
-﻿using RayTracing.CameraRendering;
+﻿using PathTracing.CameraRendering;
 using System;
 
-namespace RayTracing.ThreeDimensionalTree
+namespace PathTracing.ThreeDimensionalTree
 {
     internal class KDTreeNode
     {

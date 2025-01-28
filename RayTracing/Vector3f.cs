@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace RayTracing
+namespace PathTracing
 {
     internal struct Vector3f
     {

@@ -1,4 +1,4 @@
-﻿namespace RayTracing
+﻿namespace PathTracing
 {
     partial class RenderForm
     {

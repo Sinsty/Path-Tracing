@@ -1,6 +1,6 @@
-﻿using RayTracing.CameraRendering;
+﻿using PathTracing.CameraRendering;
 
-namespace RayTracing.ThreeDimensionalTree
+namespace PathTracing.ThreeDimensionalTree
 {
     internal interface IBoundingBoxable : ICameraRenderObject
     {

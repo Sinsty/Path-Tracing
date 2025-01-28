@@ -1,8 +1,8 @@
-﻿using RayTracing.CameraRendering;
-using RayTracing.Geometry;
+﻿using PathTracing.CameraRendering;
+using PathTracing.Geometry;
 using System.Collections.Generic;
 
-namespace RayTracing.ThreeDimensionalTree
+namespace PathTracing.ThreeDimensionalTree
 {
     internal class KDTree
     {

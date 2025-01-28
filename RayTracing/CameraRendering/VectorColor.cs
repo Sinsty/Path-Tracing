@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 
-namespace RayTracing.CameraRendering
+namespace PathTracing.CameraRendering
 {
     internal struct VectorColor
     {

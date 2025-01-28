@@ -1,6 +1,6 @@
-﻿using RayTracing.CameraRendering;
+﻿using PathTracing.CameraRendering;
 
-namespace RayTracing.Geometry
+namespace PathTracing.Geometry
 {
     internal interface ICompositeObject
     {

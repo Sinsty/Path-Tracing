@@ -1,14 +1,36 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Numerics;
+using System.Drawing;
 
-namespace RayTracing.CameraRendering
+namespace PathTracing.CameraRendering
 {
     internal static class CameraRaycaster
     {
         private static Random _random = new Random();
 
-        public static CameraRaycastInfo CastRay(Ray ray, int maxBounces)
+        public static Color PathTraceColor(Ray ray, int maxBounces, int samplesCount)
+        {
+            if (samplesCount <= 0)
+                return Color.Black;
+
+            CameraRaycastInfo firstRaycastInfo = PathTrace(ray, maxBounces);
+            if (firstRaycastInfo.IsHit == false)
+                return Color.Black;
+
+            Vector3f currentColor = PathTrace(ray, maxBounces).Color;
+
+            for (int i = 1; i < samplesCount; i++)
+            {
+                Vector3f rayColor = PathTrace(ray, maxBounces).Color;
+                currentColor += rayColor;
+            }
+
+            currentColor /= samplesCount;
+
+            return VectorColor.GammaCorrection(VectorColor.AcesFilmicTonemapping(currentColor)).ToBaseColor();
+        }
+
+        public static CameraRaycastInfo PathTrace(Ray ray, int maxBounces)
         {
             HitInfo hit;
             ICameraRenderObject intersectObject = MainRender.Scene.Tree != null ?
@@ -27,7 +49,7 @@ namespace RayTracing.CameraRendering
                 }
 
                 Ray reflectedRay = HandleReflectedRay(hit, out float pdf);
-                CameraRaycastInfo reflectedRayInfo = CastRay(reflectedRay, maxBounces - 1);
+                CameraRaycastInfo reflectedRayInfo = PathTrace(reflectedRay, maxBounces - 1);
 
                 if (reflectedRayInfo.IsHit == false)
                 {
@@ -87,6 +109,7 @@ namespace RayTracing.CameraRendering
             float e1 = (float)_random.NextDouble();
 
             e0 = MathF.Max(e0, 0.000001f);
+            e1 = MathF.Max(e1, 0.000001f);
             float cosTheta = MathF.Sqrt(e0);
             float sinTheta = MathF.Sqrt(MathF.Max(1 - cosTheta * cosTheta, 0.000001f));
             float phi = 2 * MathF.PI * e1;
@@ -95,7 +118,7 @@ namespace RayTracing.CameraRendering
             float y = MathF.Sin(phi) * sinTheta;
             float z = cosTheta;
 
-            Vector3f t = 1 > MathF.Abs(x) ? new Vector3f(0, 0, 1) : new Vector3f(1, 0, 0);
+            Vector3f t = 1 > MathF.Abs(x) ? new Vector3f(0.0001f, 0.0001f, 1) : new Vector3f(1, 0.0001f, 0.0001f);
             Vector3f tangent = Vector3f.Cross(t, normal).GetNormalized();
             Vector3f bitangent = Vector3f.Cross(normal, tangent);
 

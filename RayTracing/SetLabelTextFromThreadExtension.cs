@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace RayTracing
+namespace PathTracing
 {
     internal static class SetLabelTextFromThreadExtension
     {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LK0j3S7PMUE=",
+  "dgSpecHash": "QwMjziQiRyE=",
   "success": true,
-  "projectFilePath": "D:\\YLink\\RayTracing\\RayTracing\\RayTracing.csproj",
+  "projectFilePath": "D:\\YLink\\RayTracing\\RayTracing\\PathTracing.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Домашний\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Домашний\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512"

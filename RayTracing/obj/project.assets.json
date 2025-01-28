@@ -124,9 +124,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\YLink\\RayTracing\\RayTracing\\RayTracing.csproj",
-      "projectName": "RayTracing",
-      "projectPath": "D:\\YLink\\RayTracing\\RayTracing\\RayTracing.csproj",
+      "projectUniqueName": "D:\\YLink\\RayTracing\\RayTracing\\PathTracing.csproj",
+      "projectName": "PathTracing",
+      "projectPath": "D:\\YLink\\RayTracing\\RayTracing\\PathTracing.csproj",
       "packagesPath": "C:\\Users\\Домашний\\.nuget\\packages\\",
       "outputPath": "D:\\YLink\\RayTracing\\RayTracing\\obj\\",
       "projectStyle": "PackageReference",

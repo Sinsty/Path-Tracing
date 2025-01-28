@@ -1,8 +1,9 @@
 ﻿using System;
-using RayTracing.CameraRendering;
-using RayTracing.ThreeDimensionalTree;
+using System.Diagnostics;
+using PathTracing.CameraRendering;
+using PathTracing.ThreeDimensionalTree;
 
-namespace RayTracing.Geometry
+namespace PathTracing.Geometry
 {
     internal class Triangle : IBoundingBoxable
     {
@@ -51,6 +52,15 @@ namespace RayTracing.Geometry
         {
             Vector3f edge1 = v1p - v0p;
             Vector3f edge2 = v2p - v0p;
+
+            Vector3f normal = Vector3f.Cross(edge1, edge2).GetNormalized();
+
+            if (Vector3f.Dot(normal, ray.direction) >= 0)
+            {
+                hit = new HitInfo();
+                return false;
+            }
+
             Vector3f directionCrossEdge2 = Vector3f.Cross(ray.direction, edge2);
 
             float det = Vector3f.Dot(edge1, directionCrossEdge2);
@@ -84,14 +94,6 @@ namespace RayTracing.Geometry
 
             if (t > 0)
             {
-                Vector3f normal = Vector3f.Cross(edge1, edge2);
-
-                if (Vector3f.Dot(normal, ray.direction) >= 0)
-                {
-                    hit = new HitInfo();
-                    return false;
-                }
-
                 hit = new HitInfo(t, ray.origin + ray.direction * t, normal);
                 return true;
             }
