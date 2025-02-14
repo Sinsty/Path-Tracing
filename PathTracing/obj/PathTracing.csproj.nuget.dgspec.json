@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\YLink\\RayTracing\\RayTracing\\PathTracing.csproj": {}
+    "D:\\YLink\\RayTracing\\PathTracing\\PathTracing.csproj": {}
   },
   "projects": {
-    "D:\\YLink\\RayTracing\\RayTracing\\PathTracing.csproj": {
+    "D:\\YLink\\RayTracing\\PathTracing\\PathTracing.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\YLink\\RayTracing\\RayTracing\\PathTracing.csproj",
+        "projectUniqueName": "D:\\YLink\\RayTracing\\PathTracing\\PathTracing.csproj",
         "projectName": "PathTracing",
-        "projectPath": "D:\\YLink\\RayTracing\\RayTracing\\PathTracing.csproj",
+        "projectPath": "D:\\YLink\\RayTracing\\PathTracing\\PathTracing.csproj",
         "packagesPath": "C:\\Users\\Домашний\\.nuget\\packages\\",
-        "outputPath": "D:\\YLink\\RayTracing\\RayTracing\\obj\\",
+        "outputPath": "D:\\YLink\\RayTracing\\PathTracing\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Домашний\\AppData\\Roaming\\NuGet\\NuGet.Config",

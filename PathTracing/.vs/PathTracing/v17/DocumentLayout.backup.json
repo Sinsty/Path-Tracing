@@ -1,0 +1,72 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\YLink\\RayTracing\\PathTracing\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{05A23A4C-B9DC-47E3-B454-C0B2B32AB6D8}|PathTracing.csproj|d:\\ylink\\raytracing\\pathtracing\\renderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05A23A4C-B9DC-47E3-B454-C0B2B32AB6D8}|PathTracing.csproj|solutionrelative:renderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05A23A4C-B9DC-47E3-B454-C0B2B32AB6D8}|PathTracing.csproj|D:\\YLink\\RayTracing\\PathTracing\\renderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{05A23A4C-B9DC-47E3-B454-C0B2B32AB6D8}|PathTracing.csproj|solutionrelative:renderform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{05A23A4C-B9DC-47E3-B454-C0B2B32AB6D8}|PathTracing.csproj|d:\\ylink\\raytracing\\pathtracing\\camerarendering\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{05A23A4C-B9DC-47E3-B454-C0B2B32AB6D8}|PathTracing.csproj|solutionrelative:camerarendering\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 240,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Material.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\PathTracing\\CameraRendering\\Material.cs",
+              "RelativeDocumentMoniker": "CameraRendering\\Material.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\PathTracing\\CameraRendering\\Material.cs",
+              "RelativeToolTip": "CameraRendering\\Material.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T16:56:14.886Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RenderForm.cs",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\PathTracing\\RenderForm.cs",
+              "RelativeDocumentMoniker": "RenderForm.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\PathTracing\\RenderForm.cs",
+              "RelativeToolTip": "RenderForm.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAwwDoAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T14:55:57.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RenderForm.cs [Design]",
+              "DocumentMoniker": "D:\\YLink\\RayTracing\\PathTracing\\RenderForm.cs",
+              "RelativeDocumentMoniker": "RenderForm.cs",
+              "ToolTip": "D:\\YLink\\RayTracing\\PathTracing\\RenderForm.cs [Design]",
+              "RelativeToolTip": "RenderForm.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-29T14:55:43.449Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

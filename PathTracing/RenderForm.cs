@@ -25,9 +25,9 @@ namespace PathTracing
         private Scene CreateAndGetScene()
         {
             Material lightMaterial = new Material(new VectorColor(1f, 1f, 1f), 1f, 0f, 25f);
-            Material sphereMaterial2 = new Material(new VectorColor(0.7f, 0.5f, 1f), 0.5f, 0.8f, 0f, new VectorColor(0.0337f, 0.0337f, 0.0337f));
-            Material meshMaterial = new Material(new VectorColor(1f, 1f, 1f), 0.5f, 0.5f, 0f);
-            Material teapotMaterial = new Material(new VectorColor(0f, 1f, 1f), 0.5f, 0.5f, 0f);
+            Material sphereMaterial2 = new Material(new VectorColor(1f, 1f, 1f), 0.25f, 1f, 0f, new VectorColor(0.0337f, 0.0337f, 0.0337f));
+            Material meshMaterial = new Material(new VectorColor(0.2f, 0.3f, 1f), 0.5f, 0.75f, 0f);
+            //Material teapotMaterial = new Material(new VectorColor(0f, 1f, 1f), 0.5f, 0.5f, 0f);
 
             Material cornellLeft = new Material(new VectorColor(1f, 0f, 0f), 1f, 0f, 0f);
             Material cornellRight = new Material(new VectorColor(0f, 1f, 0f), 1f, 0f, 0f);
@@ -35,28 +35,28 @@ namespace PathTracing
 
             ICameraRenderObject[] sceneObjects =
             [
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 5, 0), new Vector3f(0, 5, 5)], cornellLeft),
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 5, 5), new Vector3f(0, 0, 5)], cornellLeft),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(-1, 6, -1), new Vector3f(-1, -1, 6), new Vector3f(-1, -1, -1)], cornellLeft),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(-1, 6, -1), new Vector3f(-1, 6, 6), new Vector3f(-1, -1, 6)], cornellLeft),
 
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(5, 5, 0), new Vector3f(5, 0, 0)], cornellRight),
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 0, 5), new Vector3f(5, 5, 5), new Vector3f(5, 0, 0)], cornellRight),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(6, 6, 6), new Vector3f(6, 6, -1), new Vector3f(6, -1, -1)], cornellRight),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(6, -1, 6), new Vector3f(6, 6, 6), new Vector3f(6, -1, -1)], cornellRight),
 
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(0, 0, 5), new Vector3f(5, 0, 5)], cornellMain),
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 0), new Vector3f(5, 0, 5), new Vector3f(5, 0, 0)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(-1, -1, -1), new Vector3f(-1, -1, 6), new Vector3f(6, -1, 6)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(-1, -1, -1), new Vector3f(6, -1, 6), new Vector3f(6, -1, -1)], cornellMain),
 
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 5), new Vector3f(0, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(5, 5, 0), new Vector3f(5, 5, 5), new Vector3f(0, 5, 0)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(6, 6, 6), new Vector3f(-1, 6, 6), new Vector3f(-1, 6, -1)], cornellMain),
+                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(6, 6, -1), new Vector3f(6, 6, 6), new Vector3f(-1, 6, -1)], cornellMain),
 
                 new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(3f, 4.99f, 3f), new Vector3f(2f, 4.99f, 3f), new Vector3f(2f, 4.99f, 2f)], lightMaterial),
                 new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(3f, 4.99f, 2f), new Vector3f(3f, 4.99f, 3f), new Vector3f(2f, 4.99f, 2f)], lightMaterial),
 
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(0, 5, 5f), new Vector3f(5, 5, 5f)], cornellMain),
-                //new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(0, 0, 5), new Vector3f(5, 5, 5f), new Vector3f(5, 0, 5)], cornellMain),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(-1, -1, 6), new Vector3f(-1, 6, 6), new Vector3f(6, 6, 6)], cornellMain),
+                new Triangle(new Vector3f(-2.5f, -2.5f, -2.5f), [new Vector3f(-1, -1, 6), new Vector3f(6, 6, 6), new Vector3f(6, -1, 6)], cornellMain),
 
                 //new Sphere(new Vector3f(0, 3.25f, 0), 1f, lightMaterial),
 
                 //new Sphere(new Vector3f(0, 0, 0), 1f, sphereMaterial2),
-                new Mesh(new Vector3f(0, 0, 2f), @"D:\YLink\RayTracing\RayTracing\src\Skull.obj", teapotMaterial)
+                new Mesh(new Vector3f(0, 0, 2f), @".\MisisModel2.obj", meshMaterial)
             ];
 
             Camera camera = new Camera(new Vector3f(0f, 0f, -5f), 60, 1000, 

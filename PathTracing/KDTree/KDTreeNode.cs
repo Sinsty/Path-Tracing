@@ -84,7 +84,9 @@ namespace PathTracing.ThreeDimensionalTree
                 float leftBoxArea = BoundingBox.CalculateSurfaceArea(leftBoxMax, leftBoxMin);
                 float rightBoxArea = BoundingBox.CalculateSurfaceArea(rightBoxMax, rightBoxMin);
 
-                float sah = CalculateSAH(Box.SurfaceArea, high[i], low[i + 1], leftBoxArea, rightBoxArea);
+                int commonElements = Box.Boxables.Count - high[i] - low[i + 1];
+
+                float sah = CalculateSAH(Box.SurfaceArea, high[i] + commonElements, low[i + 1] + commonElements, leftBoxArea, rightBoxArea);
 
                 if (sah < minSAH)
                 {
